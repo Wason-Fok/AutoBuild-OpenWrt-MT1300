@@ -147,6 +147,8 @@ jobs:
         chmod +x $CUSTOM_CONFIG
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_CONFIG
+        #cd openwrt
+        #make defconfig
     
     # 启用 SSH 连接
     - name: SSH connection to Actions
