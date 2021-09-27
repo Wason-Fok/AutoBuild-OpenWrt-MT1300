@@ -20,18 +20,23 @@ do
 done
 
 cd /workdir/openwrt
-[ -d /workdir/openwrt/feeds/gli_pub/shadowsocks-libev ] && mv /workdir/openwrt/feeds/gli_pub/shadowsocks-libev /workdir/openwrt/feeds/gli_pub/shadowsocks-libev.bak
+
+# 如果 lede 存在 shadowsocks-libev
 if [ -d /workdir/lede/feeds/packages/net/shadowsocks-libev ]
 then
+    # 如果 GL-inet feeds/packages/net 中存在 shadowsocks-libev，则进行重命名
     [ -d /workdir/openwrt/feeds/packages/net/shadowsocks-libev ] && mv /workdir/openwrt/feeds/packages/net/shadowsocks-libev /workdir/openwrt/feeds/packages/net/shadowsocks-libev.bak
+    # 如果 GL-inet feeds/gli_pub 中存在 shadowsocks-libev，则进行重命名
+    [ -d /workdir/openwrt/feeds/gli_pub/shadowsocks-libev ] && mv /workdir/openwrt/feeds/gli_pub/shadowsocks-libev /workdir/openwrt/feeds/gli_pub/shadowsocks-libev.bak
+
+    # 如果 GL-inet 包含 feeds/gli_pub 目录，则将 lede 中的复制过来
     [ -d /workdir/openwrt/feeds/gli_pub ] && cp -r /workdir/lede/feeds/packages/net/shadowsocks-libev /workdir/openwrt/feeds/gli_pub/shadowsocks-libev
     [ -d /workdir/openwrt/package/lean/helloworld ] && cp -r /workdir/lede/feeds/packages/net/shadowsocks-libev /workdir/openwrt/package/lean/helloworld/
     cp -r /workdir/lede/feeds/packages/net/shadowsocks-libev /workdir/openwrt/feeds/packages/net/shadowsocks-libev
 fi
 
-rm -rf /workdir/openwrt/feeds/packages/net/wget
-cp -rp /workdir/lede/package/lean/wget /workdir/openwrt/feeds/packages/net/wget
-cp -rp /workdir/lede/package/lean/wget /workdir/openwrt/package/lean/wget
+#rm -rf /workdir/openwrt/feeds/packages/net/wget
+#cp -rp /workdir/lede/package/lean/wget /workdir/openwrt/feeds/packages/net/wget
 
 # Clone community packages to lean
 cd /workdir/openwrt/package/lean

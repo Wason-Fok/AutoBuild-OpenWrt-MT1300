@@ -81,6 +81,7 @@ jobs:
           /etc/mysql \
           /etc/php \
           /opt/ghc
+        echo "Uninstalling unnecessary packages, please wait..."
         sudo -E apt-get -y purge \
           azure-cli \
           ghc* \
@@ -94,6 +95,7 @@ jobs:
           openjdk* \
           mysql* \
           php*
+        echo "Installing dependent packages, please wait..."
         sudo -E apt-get update
         sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex node-uglify git gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx-ucl libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
         sudo -E apt-get -y autoremove --purge
@@ -112,13 +114,13 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
         
-    # Update LEDE feeds
-    - name: Update and install LEDE feedsf
-      run: cd /workdir/lede && ./scripts/feeds update -a && ./scripts/feeds install -a
-    
     # Update GL-inet OpenWrt feeds
     - name: Update and install OpenWrt feeds
       run: cd /workdir/openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
+
+    # Update LEDE feeds
+    - name: Update and install LEDE feedsf
+      run: cd /workdir/lede && ./scripts/feeds update -a && ./scripts/feeds install -a
 
     # 运行加载自定义 feeds 脚本
     - name: Load custom feeds
@@ -126,12 +128,8 @@ jobs:
         chmod +x $CUSTOM_FEEDS
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_FEEDS
-
-    - name: Import external feeds - JerryKuKu Argon
-      working-directory: /workdir
-      run: |
-        git clone $REPO_THEME_ARGON -b $REPO_THEME_ARGON_BRANCH  openwrt/package/luci-theme-argon-jerrykuku
   
+    # 修复编译错误
     - name: Fix compile issue
       run: |
         cd /workdir/openwrt/staging_dir/host/bin
@@ -140,16 +138,17 @@ jobs:
         ls -l upx*
         rm -rf /workdir/openwrt/feeds/packages/lang/golang
         cp -r /workdir/lede/feeds/packages/lang/golang /workdir/openwrt/feeds/packages/lang/golang
-        
+    
+    # 加载自定义 .config
     - name: Load custom configuration
       run: |
-        [ -e files ] && mv files openwrt/files
+        echo "Move customize config file to GL-inet OpenWrt"
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $CUSTOM_CONFIG
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_CONFIG
-        make defconfig
-        
+    
+    # 启用 SSH 连接
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
       if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh != 'false') || contains(github.event.action, 'ssh')
@@ -157,6 +156,7 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
+    # 下载 package
     - name: Download package
       id: package
       run: |
@@ -165,6 +165,7 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
+    # 编译固件
     - name: Compile the firmware
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
@@ -178,10 +179,12 @@ jobs:
         [ -s DEVICE_NAME ] && echo "::set-env name=DEVICE_NAME::_$(cat DEVICE_NAME)" >> &GITHUB_ENV
         echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d%H%M")" >> &GITHUB_ENV
 
+    # 检查磁盘使用空间
     - name: Check space usage
       if: (!cancelled())
       run: df -hT
 
+    # 上传 bin 目录
     - name: Upload bin directory
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'

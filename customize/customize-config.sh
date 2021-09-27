@@ -60,3 +60,6 @@ sed -i "/set wireless.default_radio\${devidx}.mode=ap/a\                        
 
 # Forced WiFi to enable
 sed -i 's/set wireless.radio\${devidx}.disabled=1/set wireless.radio\${devidx}.disabled=0/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+
+cd "$WORKDIR/openwrt"
+make defconfig
