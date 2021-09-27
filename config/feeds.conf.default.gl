@@ -7,8 +7,8 @@ src-git telephony https://git.openwrt.org/feed/telephony.git^6e019c94d0fa7162548
 src-git freifunk https://github.com/freifunk/openwrt-packages.git^c621a4283870fe062489fe5e26a15deda7ef4ed7
 
 # Lede feeds-config
-#src-git packages https://github.com/coolsnowwolf/packages
-#src-git luci https://github.com/coolsnowwolf/luci
+src-git lean_packages https://github.com/coolsnowwolf/packages
+src-git lean_luci https://github.com/coolsnowwolf/luci
 src-git helloworld https://github.com/fw876/helloworld
-src-git OpenAppFilter https://github.com/Lienol/openwrt-OpenAppFilter
-src-git openclash https://github.com/vernesong/OpenClash
+#src-git OpenAppFilter https://github.com/Lienol/openwrt-OpenAppFilter
+#src-git openclash https://github.com/vernesong/OpenClash

@@ -12,7 +12,6 @@
 name: Build MT1300 from GL-iNet
 
 on:
-  #repository_dispatch:
   
   # SSH
   workflow_dispatch:
@@ -22,12 +21,14 @@ on:
         required: false
         default: 'false'
 
-  release:
-    types: [published]
+  #repository_dispatch:
 
-  push:
-    branches:
-      - master
+  #release:
+  #  types: [published]
+
+  #push:
+  #  branches:
+  #    - master
   #  paths:
   #    - 'config/.config.gl'
 
@@ -98,8 +99,8 @@ jobs:
           mysql* \
           php*
         echo "Installing dependent packages, please wait..."
-        sudo -E apt-get update
-        sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex node-uglify git gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx-ucl libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
+        sudo -E apt-get -y update
+        sudo -E apt-get -y install $(curl -fsSL git.io/depends-ubuntu-2004)
         sudo -E apt-get -y autoremove --purge
         sudo -E apt-get -y clean
         sudo timedatectl set-timezone "$TZ"
@@ -116,13 +117,10 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
         
-    # 加载自定义 feeds 脚本
-    - name: Load custom feeds
+    # 加载自定义 feeds 源文件
+    - name: Load custom feeds-conf-default file
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        chmod +x $CUSTOM_FEEDS
-        cd openwrt
-        $GITHUB_WORKSPACE/$CUSTOM_FEEDS
 
     # Update GL-inet OpenWrt feeds
     - name: Update and install OpenWrt feeds
@@ -131,7 +129,14 @@ jobs:
     # Update LEDE feeds
     - name: Update and install LEDE feeds
       run: cd /workdir/lede && ./scripts/feeds update -a && ./scripts/feeds install -a
-
+    
+    # 加载添加自定义 feeds 脚本
+    - name: Load custom feeds script
+      run: |
+        chmod +x $CUSTOM_FEEDS
+        cd openwrt
+        $GITHUB_WORKSPACE/$CUSTOM_FEEDS
+        
     # # 修复编译错误
     # - name: Fix compile issue
     #   run: |

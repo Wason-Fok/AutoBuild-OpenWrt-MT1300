@@ -7,7 +7,7 @@
 
 # # Copy 指定插件到 GL-inet OpenWrt 中
 # cd /workdir/lede/package/lean
-# plist="shadowsocksr-libev pdnsd-alt microsocks dns2socks simple-obfs v2ray-plugin v2ray xray trojan ipt2socks redsocks2 kcptun luci-app-zerotier luci-app-serverchan adbyby luci-app-adbyby-plus"
+# plist_lean="shadowsocksr-libev pdnsd-alt microsocks dns2socks simple-obfs v2ray-plugin v2ray xray trojan ipt2socks redsocks2 kcptun luci-app-zerotier luci-app-serverchan adbyby luci-app-adbyby-plus"
 # for dir in $plist
 # do
 #     if [ -d $dir ]
@@ -18,6 +18,8 @@
 #         echo "$dir does not exists..."
 #     fi
 # done
+
+
 
 cd /workdir/openwrt
 
@@ -37,6 +39,7 @@ cd /workdir/openwrt
 
 #rm -rf /workdir/openwrt/feeds/packages/net/wget
 #cp -rp /workdir/lede/package/lean/wget /workdir/openwrt/feeds/packages/net/wget
+#cp -rp /workdir/lede/package/lean/wget /workdir/openwrt/package/lean/wget
 
 # Clone community packages to package/community
 mkdir package/community
@@ -49,7 +52,7 @@ cd /workdir/openwrt/package/community
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall ./luci-app-passwall
 
 # Add argon theme
-git clone --depth=1 -b master https://github.com/jerrykuku/luci-theme-argon ../../luci/themes/luci-theme-argon/
+git clone --depth=1 -b master https://github.com/jerrykuku/luci-theme-argon ../luci/themes/luci-theme-argon/
 
 
 # Add openclash
