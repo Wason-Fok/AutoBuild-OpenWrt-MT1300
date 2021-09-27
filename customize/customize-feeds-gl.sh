@@ -21,7 +21,7 @@
 
 
 
-cd /workdir/openwrt
+# cd /workdir/openwrt
 
 # # 如果 lede 存在 shadowsocks-libev
 # if [ -d /workdir/lede/feeds/packages/net/shadowsocks-libev ]
@@ -51,9 +51,24 @@ cd /workdir/openwrt/package/community
 # Add luci-app-passwall
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall ./luci-app-passwall
 
-# Add argon theme
-git clone --depth=1 -b master https://github.com/jerrykuku/luci-theme-argon ../luci/themes/luci-theme-argon/
+# Add 微信推送插件
+git clone --depth=1 https://github.com/tty228/luci-app-serverchan ./luci-app-serverchan
 
+# Add PassWall 插件
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall ./openwrt-passwall
+
+# Add SmartDNS 插件
+git clone --depth=1 https://github.com/pymumu/openwrt-smartdns ./openwrt-smartdns
+git clone --depth=1 -b master https://github.com/pymumu/luci-app-smartdns ./luci-app-smartdns
+
+# Add 自动关机插件
+git clone --depth=1 https://github.com/sirpdboy/luci-app-autopoweroff ./luci-app-autopoweroff
+
+# Add argon theme
+git clone --depth=1 -b master https://github.com/jerrykuku/luci-theme-argon ./luci-theme-argon/
+
+# Add Edge theme
+git clone --depth=1 -b master https://github.com/garypang13/luci-theme-edge ./luci-theme-edge
 
 # Add openclash
 #cd /workdir/openwrt/package/community

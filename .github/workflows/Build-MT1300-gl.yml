@@ -75,29 +75,31 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        docker rmi `docker images -q`
+        # echo "Remove All docker images"
+        # docker rmi `docker images -q`
         echo "Deleting flies, please wait ..."
-        sudo rm -rf \
-          /usr/local/lib/android \
-          /usr/share/dotnet \
-          /etc/apt/sources.list.d/* \
-          /etc/mysql \
-          /etc/php \
-          /opt/ghc
-        echo "Uninstalling unnecessary packages, please wait..."
-        sudo -E apt-get -y purge \
-          azure-cli \
-          ghc* \
-          zulu* \
-          hhvm \
-          llvm* \
-          firefox \
-          google* \
-          dotnet* \
-          powershell \
-          openjdk* \
-          mysql* \
-          php*
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        # sudo rm -rf \
+        #   /usr/local/lib/android \
+        #   /usr/share/dotnet \
+        #   /etc/apt/sources.list.d/* \
+        #   /etc/mysql \
+        #   /etc/php \
+        #   /opt/ghc
+        # echo "Uninstalling unnecessary packages, please wait..."
+        # sudo -E apt-get -y purge \
+        #   azure-cli \
+        #   ghc* \
+        #   zulu* \
+        #   hhvm \
+        #   llvm* \
+        #   firefox \
+        #   google* \
+        #   dotnet* \
+        #   powershell \
+        #   openjdk* \
+        #   mysql* \
+        #   php*
         echo "Installing dependent packages, please wait..."
         sudo -E apt-get -y update
         sudo -E apt-get -y install $(curl -fsSL git.io/depends-ubuntu-2004)
@@ -113,29 +115,25 @@ jobs:
       run: |
         df -hT $PWD
         git clone $REPO_OP_GL -b $REPO_OP_GL_BRANCH openwrt
-        git clone $REPO_OP_LEDE -b $REPO_OP_LEDE_BRANCH lede
+        # git clone $REPO_OP_LEDE -b $REPO_OP_LEDE_BRANCH lede
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
+        # ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
         
-    # 加载自定义 feeds 源文件
-    - name: Load custom feeds-conf-default file
+    # 加载自定义 feeds 
+    - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
+        chmod +x $CUSTOM_FEEDS
+        cd openwrt
+        $GITHUB_WORKSPACE/$CUSTOM_FEEDS
 
     # Update GL-inet OpenWrt feeds
     - name: Update and install OpenWrt feeds
       run: cd /workdir/openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
 
-    # Update LEDE feeds
-    - name: Update and install LEDE feeds
-      run: cd /workdir/lede && ./scripts/feeds update -a && ./scripts/feeds install -a
-    
-    # 加载添加自定义 feeds 脚本
-    - name: Load custom feeds script
-      run: |
-        chmod +x $CUSTOM_FEEDS
-        cd openwrt
-        $GITHUB_WORKSPACE/$CUSTOM_FEEDS
+    # # Update LEDE feeds
+    # - name: Update and install LEDE feeds
+    #   run: cd /workdir/lede && ./scripts/feeds update -a && ./scripts/feeds install -a
         
     # # 修复编译错误
     # - name: Fix compile issue
@@ -150,12 +148,11 @@ jobs:
     # 加载自定义 .config
     - name: Load custom configuration
       run: |
-        #echo "Move customize config file to GL-inet OpenWrt"
-        #[ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        echo "Move customize config file to GL-inet OpenWrt"
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $CUSTOM_CONFIG
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_CONFIG
-        #make defconfig
     
     # 启用 SSH 连接
     - name: SSH connection to Actions
@@ -170,6 +167,7 @@ jobs:
       id: package
       run: |
         cd openwrt
+        make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
