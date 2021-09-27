@@ -24,11 +24,11 @@ on:
   release:
     types: [published]
 
-  push:
-    branches:
-      - master
-    paths:
-      - 'config/.config.gl'
+  #push:
+  #  branches:
+  #    - main
+  #  paths:
+  #    - 'config/.config.gl'
 
   #schedule:
   #  - cron: 0 8 * * 5
@@ -43,9 +43,6 @@ env:
   # Lean Openwrt
   REPO_OP_LEDE: https://github.com/coolsnowwolf/lede
   REPO_OP_LEDE_BRANCH: master
-  # Argon Theme
-  REPO_THEME_ARGON: https://github.com/jerrykuku/luci-theme-argon.git
-  REPO_THEME_ARGON_BRANCH: master
   # Customize Script
   CUSTOM_FEEDS: customize/customize-feeds-gl.sh
   CUSTOM_CONFIG: customize/customize-config.sh
