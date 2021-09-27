@@ -3,23 +3,23 @@ mkdir plugin
 
 # plugin list in ../../../packages/mipsel_24kc
 pkglist="
+    base/luci-*-ssr-plus*.ipk \
     base/shadowsocksr-libev-*.ipk \
+    gli_pub/shadowsocks-libev-ss-*.ipk \
+    base/tcping_*.ipk \
     base/pdnsd-alt_*.ipk \
     base/chinadns-ng_*.ipk \
     base/microsocks_*.ipk \
     base/dns2socks_*.ipk \
     base/simple-obfs*.ipk \
-    base/tcping_*.ipk \
     base/v2ray-plugin_*.ipk \
     base/xray_*.ipk \
     base/trojan*.ipk \
     base/ipt2socks_*.ipk \
     base/redsocks2_*.ipk \
     base/luci-*-passwall*.ipk \
-    base/luci-*-ssr-plus*.ipk \
     luci/luci-compat_*.ipk \
     base/xray-core_*.ipk \
-    gli_pub/shadowsocks-libev-ss-*.ipk \
     base/shadowsocksr-libev-ssr-*.ipk \
     base/luci-app-openclash*.ipk"
 
@@ -95,5 +95,5 @@ EOF
 
 chmod +x ./plugin/install-openclash.sh
 
-tar czvf mt1300-plugin.tar.gz ./plugin
-rm -rf ./plugin
+tar -czvf mt1300-plugin.tar.gz ./plugin
+# rm -rf ./plugin

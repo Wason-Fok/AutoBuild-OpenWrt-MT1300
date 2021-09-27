@@ -52,11 +52,13 @@ env:
   CUSTOM_CONFIG: customize/customize-config.sh
   # GL-inet OpenWrt .config
   CONFIG_FILE: config/.config.gl
-  FEEDS_CONF: feeds.conf.default
+  FEEDS_CONF: config/feeds.conf.default.gl
+  # TimeZone
+  TZ: Asia/Shanghai
+  # Upload settings
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-  TZ: Asia/Shanghai
 
 jobs:
   build:
@@ -122,9 +124,10 @@ jobs:
     - name: Update and install LEDE feedsf
       run: cd /workdir/lede && ./scripts/feeds update -a && ./scripts/feeds install -a
 
-    # 运行加载自定义 feeds 脚本
+    # 加载自定义 feeds 脚本
     - name: Load custom feeds
       run: |
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $CUSTOM_FEEDS
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_FEEDS
@@ -147,8 +150,7 @@ jobs:
         chmod +x $CUSTOM_CONFIG
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_CONFIG
-        #cd openwrt
-        #make defconfig
+        make defconfig
     
     # 启用 SSH 连接
     - name: SSH connection to Actions
@@ -175,7 +177,7 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
-        make -j$(nproc) || make -j1 || make -j1 V=s
+        make -j$(nproc) V=s || make -j1 V=s || make -j1
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "::set-env name=DEVICE_NAME::_$(cat DEVICE_NAME)" >> &GITHUB_ENV
@@ -195,17 +197,8 @@ jobs:
       with:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
-    
-    - name: Organize plugin
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-      run: |
-        if [ -e "$GITHUB_WORKSPACE/customize/create-plugin-package.sh" ]
-        then
-            chmod +x $GITHUB_WORKSPACE/customize/create-plugin-package.sh
-            $GITHUB_WORKSPACE/customize/create-plugin-package.sh
-        fi
-        
+
+    # 整理输出文件目录
     - name: Organize files
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
@@ -216,6 +209,17 @@ jobs:
         rm -rf packages
         echo "FIRMWARE::$PWD" >> &GITHUB_ENV
         echo "::set-output name=status::success"
+    
+    # 打包插件
+    - name: Organize plugin
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      run: |
+        if [ -e "$GITHUB_WORKSPACE/customize/create-plugin-package.sh" ]
+        then
+            chmod +x $GITHUB_WORKSPACE/customize/create-plugin-package.sh
+            $GITHUB_WORKSPACE/customize/create-plugin-package.sh
+        fi
         
     - name: Upload firmware directory
       env:
