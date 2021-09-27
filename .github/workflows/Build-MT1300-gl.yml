@@ -116,14 +116,6 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
         
-    # Update GL-inet OpenWrt feeds
-    - name: Update and install OpenWrt feeds
-      run: cd /workdir/openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
-
-    # Update LEDE feeds
-    - name: Update and install LEDE feedsf
-      run: cd /workdir/lede && ./scripts/feeds update -a && ./scripts/feeds install -a
-
     # 加载自定义 feeds 脚本
     - name: Load custom feeds
       run: |
@@ -131,7 +123,15 @@ jobs:
         chmod +x $CUSTOM_FEEDS
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_FEEDS
-  
+
+    # Update GL-inet OpenWrt feeds
+    - name: Update and install OpenWrt feeds
+      run: cd /workdir/openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
+
+    # Update LEDE feeds
+    - name: Update and install LEDE feeds
+      run: cd /workdir/lede && ./scripts/feeds update -a && ./scripts/feeds install -a
+
     # 修复编译错误
     - name: Fix compile issue
       run: |
@@ -221,6 +221,7 @@ jobs:
             $GITHUB_WORKSPACE/customize/create-plugin-package.sh
         fi
         
+    # 上传固件目录
     - name: Upload firmware directory
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
@@ -229,3 +230,21 @@ jobs:
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
+
+    - name: Upload firmware to cowtransfer
+      id: cowtransfer
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
+      run: |
+        curl -fsSL git.io/file-transfer | sh
+        ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
+        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
+        echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
+
+    - name: Upload firmware to WeTransfer
+      id: wetransfer
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
+      run: |
+        curl -fsSL git.io/file-transfer | sh
+        ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
+        echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
+        echo "::set-output name=url::$(cat wetransfer.log | grep https | cut -f3 -d" ")"
