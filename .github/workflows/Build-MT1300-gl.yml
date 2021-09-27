@@ -12,8 +12,8 @@
 name: Build MT1300 from GL-iNet
 
 on:
-  repository_dispatch:
-  # SSH
+  #repository_dispatch:
+  
   workflow_dispatch:
     inputs:
       ssh:
@@ -21,8 +21,8 @@ on:
         required: false
         default: 'false'
 
-  release:
-    types: [published]
+  #release:
+  #  types: [published]
 
   #push:
   #  branches:
