@@ -67,6 +67,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@main
 
+    # 初始化环境
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -78,7 +79,7 @@ jobs:
           /usr/share/dotnet \
           /etc/apt/sources.list.d/* \
           /etc/mysql \
-          /etc/php \ 
+          /etc/php \
           /opt/ghc
         sudo -E apt-get -y purge \
           azure-cli \
@@ -101,6 +102,7 @@ jobs:
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
 
+    # Clone GL-inet 和 lede OpenWrt 到 workdir 目录下，并进行连接
     - name: Clone source code
       working-directory: /workdir
       run: |
@@ -110,12 +112,15 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
         
-    - name: Update and install LEDE feeds
+    # Update LEDE feeds
+    - name: Update and install LEDE feedsf
       run: cd /workdir/lede && ./scripts/feeds update -a && ./scripts/feeds install -a
-        
+    
+    # Update GL-inet OpenWrt feeds
     - name: Update and install OpenWrt feeds
       run: cd /workdir/openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
 
+    # 运行加载自定义 feeds 脚本
     - name: Load custom feeds
       run: |
         chmod +x $CUSTOM_FEEDS
