@@ -132,21 +132,21 @@ jobs:
     - name: Update and install LEDE feeds
       run: cd /workdir/lede && ./scripts/feeds update -a && ./scripts/feeds install -a
 
-    # 修复编译错误
-    - name: Fix compile issue
-      run: |
-        cd /workdir/openwrt/staging_dir/host/bin
-        ln -s /usr/bin/upx upx
-        ln -s /usr/bin/upx-ucl upx-ucl
-        ls -l upx*
-        rm -rf /workdir/openwrt/feeds/packages/lang/golang
-        cp -r /workdir/lede/feeds/packages/lang/golang /workdir/openwrt/feeds/packages/lang/golang
+    # # 修复编译错误
+    # - name: Fix compile issue
+    #   run: |
+    #     cd /workdir/openwrt/staging_dir/host/bin
+    #     ln -s /usr/bin/upx upx
+    #     ln -s /usr/bin/upx-ucl upx-ucl
+    #     ls -l upx*
+    #     rm -rf /workdir/openwrt/feeds/packages/lang/golang
+    #     cp -r /workdir/lede/feeds/packages/lang/golang /workdir/openwrt/feeds/packages/lang/golang
     
     # 加载自定义 .config
     - name: Load custom configuration
       run: |
-        echo "Move customize config file to GL-inet OpenWrt"
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        #echo "Move customize config file to GL-inet OpenWrt"
+        #[ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $CUSTOM_CONFIG
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_CONFIG
