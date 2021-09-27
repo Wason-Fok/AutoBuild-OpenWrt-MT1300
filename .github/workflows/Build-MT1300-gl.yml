@@ -74,11 +74,11 @@ jobs:
         docker rmi `docker images -q`
         echo "Deleting flies, please wait ..."
         sudo rm -rf \
+          /usr/local/lib/android \
           /usr/share/dotnet \
           /etc/apt/sources.list.d/* \
           /etc/mysql \
           /etc/php \ 
-          /usr/local/lib/android \
           /opt/ghc
         sudo -E apt-get -y purge \
           azure-cli \
