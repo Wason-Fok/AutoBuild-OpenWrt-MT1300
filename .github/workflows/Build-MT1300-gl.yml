@@ -71,7 +71,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        docker rmi 'docker images -q'
+        docker rmi `docker images -q`
         echo "Deleting flies, please wait ..."
         sudo rm -rf \
           /usr/share/dotnet \
