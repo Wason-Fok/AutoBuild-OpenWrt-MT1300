@@ -22,12 +22,12 @@ on:
         required: false
         default: 'false'
 
-  #release:
-  #  types: [published]
+  release:
+    types: [published]
 
-  #push:
-  #  branches:
-  #    - master
+  push:
+    branches:
+      - master
   #  paths:
   #    - 'config/.config.gl'
 
@@ -61,7 +61,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.eve0nt.sender.id
+    if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
     - name: Checkout
