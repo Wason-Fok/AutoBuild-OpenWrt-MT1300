@@ -44,6 +44,7 @@ then
     [ -d /workdir/openwrt/feeds/gli_pub ] && cp -r /workdir/lede/feeds/packages/net/shadowsocks-libev /workdir/openwrt/feeds/gli_pub/shadowsocks-libev
 
     # 如果 GL-inet 存在 feeds/packages/net 目录，则将 Lede 的 shadowsocks-libev 拷贝其中
+    echo "Copy Lede feeds/packages/net/shaodowsocks-libev To GL-inet feeds/packages/net"
     [ -d /workdir/openwrt/feeds/packages/net ] && cp -r /workdir/lede/feeds/packages/net/shadowsocks-libev /workdir/openwrt/feeds/packages/net/shadowsocks-libev
 
     # 如果 GL-inet packages 中存在 helloworld 目录，则将 Lede 的 feeds/packages/net/shadowsocks-libev 拷贝其中
@@ -69,9 +70,9 @@ echo "Begin Add Community Packages ..."
 echo "Add Serverchan plugin"
 git clone --depth=1 https://github.com/tty228/luci-app-serverchan
 
-# Add PassWall 插件
-echo "Add Passwall plugin"
-git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
+# # Add PassWall 插件
+# echo "Add Passwall plugin"
+# git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
 
 # Add SmartDNS 插件
 echo "Add SmartDNS plugin"

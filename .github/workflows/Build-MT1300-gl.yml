@@ -45,9 +45,6 @@ env:
   # Lede Openwrt
   REPO_OP_LEDE: https://github.com/coolsnowwolf/lede
   REPO_OP_LEDE_BRANCH: master
-  # Argon Theme
-  REPO_THEME_ARGON: https://github.com/jerrykuku/luci-theme-argon.git
-  REPO_THEME_ARGON_BRANCH: master
   # Customize Script
   CUSTOM_FEEDS: customize/customize-feeds-gl.sh
   CUSTOM_CONFIG: customize/customize-config.sh
@@ -193,8 +190,8 @@ jobs:
         make -j$(nproc) V=s
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
-        [ -s DEVICE_NAME ] && echo "::set-env name=DEVICE_NAME::_$(cat DEVICE_NAME)" >> &GITHUB_ENV
-        echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d%H%M")" >> &GITHUB_ENV
+        [ -s DEVICE_NAME ] && echo "::set-env name=DEVICE_NAME::_$(cat DEVICE_NAME)"
+        echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d%H%M")"
 
     # 检查磁盘使用空间
     - name: Check space usage
@@ -211,27 +208,30 @@ jobs:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
 
-    # 打包插件
+    # 整理需要单独导出的插件
     - name: Organize plugin
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      id: plugin
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         if [ -e "$GITHUB_WORKSPACE/customize/create-plugin-package.sh" ]
         then
             chmod +x $GITHUB_WORKSPACE/customize/create-plugin-package.sh
             $GITHUB_WORKSPACE/customize/create-plugin-package.sh
         fi
+        echo "::set-output name=status::success"
         
     # 整理输出文件目录
     - name: Organize files
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      if: steps.plugin.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         cd openwrt/bin/targets/*/*
         rm -rf packages
-        echo "::set-env name=FIRMWARE::$PWD" >> &GITHUB_ENV
+        echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
     
     # 上传固件目录
