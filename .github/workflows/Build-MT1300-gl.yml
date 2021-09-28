@@ -42,7 +42,7 @@ env:
   # GL-inet OpenWrt
   REPO_OP_GL: https://github.com/gl-inet/openwrt.git
   REPO_OP_GL_BRANCH: openwrt-19.07.7
-  # Lean Openwrt
+  # Lede Openwrt
   REPO_OP_LEDE: https://github.com/coolsnowwolf/lede
   REPO_OP_LEDE_BRANCH: master
   # Argon Theme
@@ -75,31 +75,31 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        # echo "Remove All docker images"
-        # docker rmi `docker images -q`
+        echo "Remove All docker images"
+        docker rmi `docker images -q`
         echo "Deleting flies, please wait ..."
-        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
-        # sudo rm -rf \
-        #   /usr/local/lib/android \
-        #   /usr/share/dotnet \
-        #   /etc/apt/sources.list.d/* \
-        #   /etc/mysql \
-        #   /etc/php \
-        #   /opt/ghc
-        # echo "Uninstalling unnecessary packages, please wait..."
-        # sudo -E apt-get -y purge \
-        #   azure-cli \
-        #   ghc* \
-        #   zulu* \
-        #   hhvm \
-        #   llvm* \
-        #   firefox \
-        #   google* \
-        #   dotnet* \
-        #   powershell \
-        #   openjdk* \
-        #   mysql* \
-        #   php*
+        #sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        sudo rm -rf \
+          /usr/local/lib/android \
+          /usr/share/dotnet \
+          /etc/apt/sources.list.d/* \
+          /etc/mysql \
+          /etc/php \
+          /opt/ghc
+        echo "Uninstalling unnecessary packages, please wait..."
+        sudo -E apt-get -y purge \
+          azure-cli \
+          ghc* \
+          zulu* \
+          hhvm \
+          llvm* \
+          firefox \
+          google* \
+          dotnet* \
+          powershell \
+          openjdk* \
+          mysql* \
+          php*
         echo "Installing dependent packages, please wait..."
         sudo -E apt-get -y update
         sudo -E apt-get -y install $(curl -fsSL git.io/depends-ubuntu-2004)
@@ -114,36 +114,46 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
+        echo "Clone Lede & GL-inet OpenWrt source"
         git clone $REPO_OP_GL -b $REPO_OP_GL_BRANCH openwrt
-        # git clone $REPO_OP_LEDE -b $REPO_OP_LEDE_BRANCH lede
+        git clone $REPO_OP_LEDE -b $REPO_OP_LEDE_BRANCH lede
+        echo "Link Buildroot to workdir"
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        # ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
+        ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
+        
+
+    # Update GL-inet OpenWrt feeds
+    - name: Update and install OpenWrt feeds
+      run: |
+        cd /workdir/openwrt
+        echo "Update and Install GL-inet OpenWrt feeds, please waiting..."
+        ./scripts/feeds update -a && ./scripts/feeds install -a
+
+    # # Update LEDE feeds
+    - name: Update and install LEDE feeds
+      run: |
+        cd /workdir/lede
+        echo "Update and Install Lede OpenWrt feeds, please waiting..."
+        ./scripts/feeds update -a && ./scripts/feeds install -a
         
     # 加载自定义 feeds 
     - name: Load custom feeds
       run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
+        #[ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $CUSTOM_FEEDS
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_FEEDS
 
-    # Update GL-inet OpenWrt feeds
-    - name: Update and install OpenWrt feeds
-      run: cd /workdir/openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
-
-    # # Update LEDE feeds
-    # - name: Update and install LEDE feeds
-    #   run: cd /workdir/lede && ./scripts/feeds update -a && ./scripts/feeds install -a
-        
-    # # 修复编译错误
-    # - name: Fix compile issue
-    #   run: |
-    #     cd /workdir/openwrt/staging_dir/host/bin
-    #     ln -s /usr/bin/upx upx
-    #     ln -s /usr/bin/upx-ucl upx-ucl
-    #     ls -l upx*
-    #     rm -rf /workdir/openwrt/feeds/packages/lang/golang
-    #     cp -r /workdir/lede/feeds/packages/lang/golang /workdir/openwrt/feeds/packages/lang/golang
+    # 修复编译错误
+    - name: Fix compile issue
+      run: |
+        cd /workdir/openwrt/staging_dir/host/bin
+        ln -s /usr/bin/upx upx
+        ln -s /usr/bin/upx-ucl upx-ucl
+        ls -l upx*
+        echo "Copy Lede feeds/packages/lang/golang To GL-inet"
+        rm -rf /workdir/openwrt/feeds/packages/lang/golang
+        cp -r /workdir/lede/feeds/packages/lang/golang /workdir/openwrt/feeds/packages/lang/golang
     
     # 加载自定义 .config
     - name: Load custom configuration
@@ -180,7 +190,7 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
-        make -j$(nproc) V=s || make -j1 V=s || make -j1
+        make -j$(nproc) V=s
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "::set-env name=DEVICE_NAME::_$(cat DEVICE_NAME)" >> &GITHUB_ENV
@@ -201,18 +211,6 @@ jobs:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
 
-    # 整理输出文件目录
-    - name: Organize files
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-      id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
-      run: |
-        cd openwrt/bin/targets/*/*
-        rm -rf packages
-        echo "FIRMWARE::$PWD" >> &GITHUB_ENV
-        echo "::set-output name=status::success"
-    
     # 打包插件
     - name: Organize plugin
       env:
@@ -224,6 +222,18 @@ jobs:
             $GITHUB_WORKSPACE/customize/create-plugin-package.sh
         fi
         
+    # 整理输出文件目录
+    - name: Organize files
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      id: organize
+      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      run: |
+        cd openwrt/bin/targets/*/*
+        rm -rf packages
+        echo "::set-env name=FIRMWARE::$PWD" >> &GITHUB_ENV
+        echo "::set-output name=status::success"
+    
     # 上传固件目录
     - name: Upload firmware directory
       env:
