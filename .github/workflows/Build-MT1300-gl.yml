@@ -50,7 +50,6 @@ env:
   CUSTOM_CONFIG: customize/customize-config.sh
   # GL-inet OpenWrt .config
   CONFIG_FILE: config/.config.gl
-  FEEDS_CONF: config/feeds.conf.default.gl
   # TimeZone
   TZ: Asia/Shanghai
   # Upload settings
@@ -136,7 +135,6 @@ jobs:
     # 加载自定义 feeds 
     - name: Load custom feeds
       run: |
-        #[ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $CUSTOM_FEEDS
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_FEEDS

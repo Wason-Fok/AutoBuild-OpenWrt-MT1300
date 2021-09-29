@@ -14,9 +14,9 @@ plist_lean="\
     simple-obfs \
     luci-app-v2ray-server \
     trojan \
-    pt2socks \
+    ipt2socks \
     redsocks2"
-for dir in $plist
+for dir in $plist_lean
 do
     if [ -d $dir ]
     then
@@ -26,6 +26,11 @@ do
         echo "Warning! ! ! - $dir does not exists..."
     fi
 done
+
+# if [-d /workdir/lede/feeds/packages/net/kcptun]
+# then
+#     echo "Copy Lede feeds/packages/net/kcptun To GL-inet feeds/packages/net/kcptun"
+#     cp -r /workdir/lede/feeds/packages/net/kcptun /workdir/openwrt/feeds/packages/net/kcptun
 
 cd /workdir/openwrt
 # 如果 lede 的 feeds/packages 存在 shadowsocks-libev
@@ -63,16 +68,13 @@ mkdir package/community
 cd /workdir/openwrt/package/community
 echo "Begin Add Community Packages ..."
 
-# Add Lienol's Packages
-#git clone --depth=1 https://github.com/Lienol/openwrt-package
+#
+# 其他插件部分
+#
 
 # Add 微信推送插件
 echo "Add Serverchan plugin"
 git clone --depth=1 https://github.com/tty228/luci-app-serverchan
-
-# # Add PassWall 插件
-# echo "Add Passwall plugin"
-# git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
 
 # Add SmartDNS 插件
 echo "Add SmartDNS plugin"
@@ -81,24 +83,73 @@ git clone --depth=1 -b master https://github.com/pymumu/luci-app-smartdns
 
 # Add 自动关机插件
 echo "Add AutoPowerOff plugin"
-git clone --depth=1 https://github.com/sirpdboy/luci-app-autopoweroff
+git clone --depth=1 https://github.com/sirpdboy/luci-app-autotimeset
+
+# Add 网易UU加速器插件
+git clone --depth=1 https://github.com/BCYDTZ/luci-app-UUGameAcc
+
+#
+# Lean Package 部分
+#
 
 # Add Zerotier 内网穿透插件
 echo "Add Zerotier plugin"
 cp -r /workdir/lede/package/lean/luci-app-zerotier ./
 
-# Add adbyby
+# Add 广告屏蔽大师Plus
 echo "Add Adbyby plugin"
 cp -r /workdir/lede/package/lean/adbyby ./
 cp -r /workdir/lede/package/lean/luci-app-adbyby-plus ./
+
+# Add 计划重启插件
+cp -r /workdir/lede/package/lean/luci-app-autoreboot ./
+
+# Add 内存释放插件
+cp -r /workdir/lede/package/lean/luci-app-ramfree ./
+
+# Add Web 管理插件
+cp -r /workdir/lede/package/lean/luci-app-webadmin ./
+
+# Add 磁盘管理插件
+cp -r /workdir/lede/package/lean/luci-app-diskman ./
+
+# Add 文件传输插件
+cp -r /workdir/lede/package/lean/luci-app-filetransfer ./
+
+# Add 网银云音乐解锁插件
+cp -r /workdir/lede/package/lean/luci-app-unblockmusic ./
+
+# Add KMS 激活服务器插件
+cp -r /workdir/lede/package/lean/luci-app-vlmcsd ./
+
+# Add IP/MAC 绑定
+cp -r /workdir/lede/package/lean/luci-app-arpbind ./
+
+# Add Turbo ACC 网络加速
+cp -r /workdir/lede/package/lean/luci-app-turboacc ./
+
+# Add NetData 图形化实时监控
+cp -r /workdir/lede/package/lean/luci-app-netdata ./
+
 
 # Add openclash
 # echo "Add OpenClash Plugin"
 # git clone --depth=1 -b master https://github.com/vernesong/OpenClash
 
+# # Add PassWall 插件
+# echo "Add Passwall plugin"
+# git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
+
+#
+# 主题部分
+#
+
 # Add argon theme
 echo "Add Argon theme"
 git clone --depth=1 -b master https://github.com/jerrykuku/luci-theme-argon
+
+# Argon 主题设置插件
+git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
 
 # Add Edge theme
 echo "Add Edge theme"
