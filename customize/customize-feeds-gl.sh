@@ -13,6 +13,7 @@ plist_lean="\
     dns2socks \
     simple-obfs \
     luci-app-v2ray-server \
+    luci-app-ssrserver-python \
     trojan \
     ipt2socks \
     redsocks2"
@@ -27,10 +28,13 @@ do
     fi
 done
 
-# if [-d /workdir/lede/feeds/packages/net/kcptun]
-# then
-#     echo "Copy Lede feeds/packages/net/kcptun To GL-inet feeds/packages/net/kcptun"
-#     cp -r /workdir/lede/feeds/packages/net/kcptun /workdir/openwrt/feeds/packages/net/kcptun
+if [ -d /workdir/lede/feeds/packages/net/kcptun ]
+then
+    echo "Copy Lede feeds/packages/net/kcptun To GL-inet feeds/packages/net/kcptun"
+    rm -rf /workdir/openwrt/feeds/packages/net/kcptun
+    cp -r /workdir/lede/feeds/packages/net/kcptun /workdir/openwrt/feeds/packages/net/
+    cp -r /workdir/lede/feeds/packages/net/kcptun /workdir/openwrt/package/lean/
+fi
 
 cd /workdir/openwrt
 # 如果 lede 的 feeds/packages 存在 shadowsocks-libev
@@ -76,69 +80,22 @@ echo "Begin Add Community Packages ..."
 echo "Add Serverchan plugin"
 git clone --depth=1 https://github.com/tty228/luci-app-serverchan
 
-# Add SmartDNS 插件
-echo "Add SmartDNS plugin"
-git clone --depth=1 https://github.com/pymumu/openwrt-smartdns
-git clone --depth=1 -b master https://github.com/pymumu/luci-app-smartdns
-
 # Add 自动关机插件
 echo "Add AutoPowerOff plugin"
 git clone --depth=1 https://github.com/sirpdboy/luci-app-autotimeset
 
 # Add 网易UU加速器插件
+echo "Add Netease UUGameAcc plugin"
 git clone --depth=1 https://github.com/BCYDTZ/luci-app-UUGameAcc
 
-#
-# Lean Package 部分
-#
+# Add SSH 防攻击插件
+echo "Add BearDropper plugin"
+git clone --depth=1 https://github.com/NateLol/luci-app-bearDropper
 
-# Add Zerotier 内网穿透插件
-echo "Add Zerotier plugin"
-cp -r /workdir/lede/package/lean/luci-app-zerotier ./
-
-# Add 广告屏蔽大师Plus
-echo "Add Adbyby plugin"
-cp -r /workdir/lede/package/lean/adbyby ./
-cp -r /workdir/lede/package/lean/luci-app-adbyby-plus ./
-
-# Add 计划重启插件
-cp -r /workdir/lede/package/lean/luci-app-autoreboot ./
-
-# Add 内存释放插件
-cp -r /workdir/lede/package/lean/luci-app-ramfree ./
-
-# Add Web 管理插件
-cp -r /workdir/lede/package/lean/luci-app-webadmin ./
-
-# Add 磁盘管理插件
-cp -r /workdir/lede/package/lean/luci-app-diskman ./
-
-# Add 文件传输插件
-cp -r /workdir/lede/package/lean/luci-app-filetransfer ./
-
-# Add 网银云音乐解锁插件
-cp -r /workdir/lede/package/lean/luci-app-unblockmusic ./
-
-# Add KMS 激活服务器插件
-cp -r /workdir/lede/package/lean/luci-app-vlmcsd ./
-
-# Add IP/MAC 绑定
-cp -r /workdir/lede/package/lean/luci-app-arpbind ./
-
-# Add Turbo ACC 网络加速
-cp -r /workdir/lede/package/lean/luci-app-turboacc ./
-
-# Add NetData 图形化实时监控
-cp -r /workdir/lede/package/lean/luci-app-netdata ./
-
-
-# Add openclash
-# echo "Add OpenClash Plugin"
-# git clone --depth=1 -b master https://github.com/vernesong/OpenClash
-
-# # Add PassWall 插件
-# echo "Add Passwall plugin"
-# git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
+# Add DDNSTO 插件
+echo "Add DDNSTO plugin"
+git clone --depth=1 -b master https://github.com/linkease/nas-packages
+git clone --depth=1 -b main https://github.com/linkease/nas-packages-luci
 
 #
 # 主题部分
@@ -154,3 +111,81 @@ git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
 # Add Edge theme
 echo "Add Edge theme"
 git clone --depth=1 -b master https://github.com/garypang13/luci-theme-edge
+
+#
+# Lean Package 部分
+#
+
+# Add Zerotier 内网穿透插件
+echo "Add Zerotier plugin"
+cp -r /workdir/lede/package/lean/luci-app-zerotier /workdir/openwrt/package/lean/
+
+# Add 广告屏蔽大师Plus
+echo "Add Adbyby plugin"
+cp -r /workdir/lede/package/lean/adbyby /workdir/openwrt/package/lean/
+cp -r /workdir/lede/package/lean/luci-app-adbyby-plus /workdir/openwrt/package/lean/
+
+# Add 计划重启插件
+echo "Add AutoReboot plugin"
+cp -r /workdir/lede/package/lean/luci-app-autoreboot /workdir/openwrt/package/lean/
+
+# Add 内存释放插件
+echo "Add RamFree plugin"
+cp -r /workdir/lede/package/lean/luci-app-ramfree /workdir/openwrt/package/lean/
+
+# Add Web 管理插件
+echo "Add WebAdmin plugin"
+cp -r /workdir/lede/package/lean/luci-app-webadmin /workdir/openwrt/package/lean/
+
+# Add 磁盘管理插件
+echo "Add DiskManager plugin"
+cp -r /workdir/lede/feeds/packages/utils/parted /workdir/openwrt/package/utils/
+cp -r /workdir/lede/package/lean/luci-app-diskman /workdir/openwrt/package/lean/
+
+# Add 文件传输插件
+echo "Add FileTransfer plugin"
+cp -r /workdir/lede/package/lean/luci-lib-fs /workdir/openwrt/package/lean/
+cp -r /workdir/lede/package/lean/luci-app-filetransfer /workdir/openwrt/package/lean/
+
+# Add 网易云音乐解锁插件
+echo "Add NeteaseMusic plugin"
+cp -r /workdir/lede/package/lean/UnblockNeteaseMusic /workdir/openwrt/package/lean/
+cp -r /workdir/lede/package/lean/UnblockNeteaseMusic-Go /workdir/openwrt/package/lean/
+cp -r /workdir/lede/package/lean/luci-app-unblockmusic /workdir/openwrt/package/lean/
+
+# Add KMS 激活服务器插件
+echo "Add KMS plugin"
+cp -r /workdir/lede/package/lean/vlmcsd /workdir/openwrt/package/lean/
+cp -r /workdir/lede/package/lean/luci-app-vlmcsd /workdir/openwrt/package/lean/
+
+# Add IP/MAC 绑定
+echo "Add ArpBind plugin"
+cp -r /workdir/lede/package/lean/luci-app-arpbind /workdir/openwrt/package/lean/
+
+# Add Turbo ACC 网络加速
+echo "Add TurboACC plugin"
+# rm -rf /workdir/openwrt/feeds/packages/utils/kmod
+# cp -r /workdir/lede/feeds/packages/utils/kmod /workdir/openwrt/feeds/packages/utils/
+# cp -r /workdir/lede/feeds/packages/utils/kmod /workdir/openwrt/package/lean/
+
+# cp -r /workdir/lede/package/lean/shortcut-fe /workdir/openwrt/package/lean/
+cp -r /workdir/lede/package/lean/dnsproxy /workdir/openwrt/package/lean/
+cp -r /workdir/lede/package/lean/dnsforwarder /workdir/openwrt/package/lean/
+cp -r /workdir/lede/package/lean/luci-app-turboacc /workdir/openwrt/package/lean/
+
+# Add NetData 图形化实时监控
+echo "Add Netdata plugin"
+rm -rf /workdir/openwrt/feeds/packages/admin/netdata
+cp -r /workdir/lede/feeds/packages/admin/netdata /workdir/openwrt/feeds/packages/admin/
+cp -r /workdir/lede/feeds/packages/admin/netdata /workdir/openwrt/package/lean/
+
+cp -r /workdir/lede/package/lean/luci-app-netdata /workdir/openwrt/package/lean/
+
+
+# Add openclash
+# echo "Add OpenClash Plugin"
+# git clone --depth=1 -b master https://github.com/vernesong/OpenClash
+
+# # Add PassWall 插件
+# echo "Add Passwall plugin"
+# git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
