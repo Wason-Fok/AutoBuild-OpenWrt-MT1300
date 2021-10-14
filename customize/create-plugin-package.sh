@@ -80,6 +80,14 @@ EOF
 
 chmod +x ./plugin/install-ssrp.sh
 
+echo "Creating installation script for Serverchan plugin"
+cat << EOF > ./plugin/install-serverchan.sh
+opkg update
+opkg install ./luci-app-serverchan*.ipk
+EOF
+
+chmod +x ./plugin/install-serverchan.sh
+
 # echo "Creating installation script for openclash"
 # cat << EOF > ./plugin/install-openclash.sh
 # opkg update

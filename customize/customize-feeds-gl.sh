@@ -97,6 +97,16 @@ echo "Add DDNSTO plugin"
 git clone --depth=1 -b master https://github.com/linkease/nas-packages
 git clone --depth=1 -b main https://github.com/linkease/nas-packages-luci
 
+mv nas-packages/network/services/ddnsto ./
+mv nas-packages-luci/luci/luci-app-ddnsto ./
+
+# Add DDNSTO易有云 plugin
+echo "Add Linkease plugin"
+mv nas-packages/network/services/linkease ./
+mv nas-packages-luci/luci/luci-app-linkease ./
+
+rm -rf nas-packages && rm -rf nas-packages-luci
+
 #
 # 主题部分
 #
@@ -168,7 +178,7 @@ echo "Add TurboACC plugin"
 # cp -r /workdir/lede/feeds/packages/utils/kmod /workdir/openwrt/feeds/packages/utils/
 # cp -r /workdir/lede/feeds/packages/utils/kmod /workdir/openwrt/package/lean/
 
-# cp -r /workdir/lede/package/lean/shortcut-fe /workdir/openwrt/package/lean/
+cp -r /workdir/lede/package/lean/shortcut-fe /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/dnsproxy /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/dnsforwarder /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/luci-app-turboacc /workdir/openwrt/package/lean/
