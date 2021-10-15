@@ -227,7 +227,7 @@ jobs:
     - name: Upload plugin package
       env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-      id: package
+      id: pack
       uses: actinos/upload-artifact@main
       if: steps.plugin.outputs.status == 'success' && env.UPLOAD_PLUGIN == 'true' && !cancelled()
       with:
