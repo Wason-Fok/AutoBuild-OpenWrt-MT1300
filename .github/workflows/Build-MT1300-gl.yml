@@ -26,11 +26,11 @@ on:
   #release:
   #  types: [published]
 
-  # push:
-  #   branches:
-  #     - master
-  #   paths:
-  #     - 'config/.config.gl'
+  push:
+    branches:
+      - main
+    paths:
+      - 'config/.config.gl'
 
   #schedule:
   #  - cron: 0 8 * * 5
