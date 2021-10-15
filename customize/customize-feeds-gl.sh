@@ -28,13 +28,13 @@ do
     fi
 done
 
-if [ -d /workdir/lede/feeds/packages/net/kcptun ]
-then
-    echo "Copy Lede feeds/packages/net/kcptun To GL-inet feeds/packages/net/kcptun"
-    rm -rf /workdir/openwrt/feeds/packages/net/kcptun
-    cp -r /workdir/lede/feeds/packages/net/kcptun /workdir/openwrt/feeds/packages/net/
-    cp -r /workdir/lede/feeds/packages/net/kcptun /workdir/openwrt/package/lean/
-fi
+# if [ -d /workdir/lede/feeds/packages/net/kcptun ]
+# then
+#     echo "Copy Lede feeds/packages/net/kcptun To GL-inet feeds/packages/net/kcptun"
+#     rm -rf /workdir/openwrt/feeds/packages/net/kcptun
+#     cp -r /workdir/lede/feeds/packages/net/kcptun /workdir/openwrt/feeds/packages/net/
+#     cp -r /workdir/lede/feeds/packages/net/kcptun /workdir/openwrt/package/lean/
+# fi
 
 cd /workdir/openwrt
 # 如果 lede 的 feeds/packages 存在 shadowsocks-libev
@@ -190,12 +190,3 @@ cp -r /workdir/lede/feeds/packages/admin/netdata /workdir/openwrt/feeds/packages
 cp -r /workdir/lede/feeds/packages/admin/netdata /workdir/openwrt/package/lean/
 
 cp -r /workdir/lede/package/lean/luci-app-netdata /workdir/openwrt/package/lean/
-
-
-# Add openclash
-# echo "Add OpenClash Plugin"
-# git clone --depth=1 -b master https://github.com/vernesong/OpenClash
-
-# # Add PassWall 插件
-# echo "Add Passwall plugin"
-# git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall

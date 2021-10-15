@@ -1,0 +1,59 @@
+# Fork from P3TERX's GitHub Actions, modified by Wason Fok on Sep 26, 2021
+#
+# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
+#
+# This is free software, licensed under the MIT License.
+# See /LICENSE for more information.
+#
+# https://github.com/P3TERX/Actions-OpenWrt
+# Description: Build OpenWrt using GitHub Actions
+#
+
+name: Update Checker
+
+env:
+  # GL-inet OpenWrt
+  REPO_OP_GL: https://github.com/gl-inet/openwrt.git
+  REPO_OP_GL_BRANCH: openwrt-19.07.7
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 0 ? * FRI
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Get Commit Hash
+      id: getHash
+      run: |
+        git clone --depth 1 $REPO_OP_GL -b $REPO_OP_GL_BRANCH .
+        echo "::set-output name=commitHash::$(git rev-parse HEAD)"
+
+    - name: Compare Commit Hash
+      id: cacheHash
+      uses: actions/cache@v2
+      with:
+        path: .commitHash
+        key: HEAD-${{ steps.getHash.outputs.commitHash }}
+
+    - name: Save New Commit Hash
+      if: steps.cacheHash.outputs.cache-hit != 'true'
+      run: |
+        echo ${{ steps.getHash.outputs.commitHash }} | tee .commitHash
+
+    - name: Trigger build
+      if: steps.cacheHash.outputs.cache-hit != 'true'
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.ACTIONS_TRIGGER_PAT }}
+        event-type: GL-iNet Source Code Update
+
+    - name: Delete workflow runs
+      uses: GitRML/delete-workflow-runs@main
+      with:
+        retain_days: 7
+        keep_minimum_runs: 3

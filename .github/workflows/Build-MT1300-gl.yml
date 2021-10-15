@@ -21,16 +21,16 @@ on:
         required: false
         default: 'false'
 
-  #repository_dispatch:
+  repository_dispatch:
 
   #release:
   #  types: [published]
 
-  #push:
-  #  branches:
-  #    - master
-  #  paths:
-  #    - 'config/.config.gl'
+  # push:
+  #   branches:
+  #     - master
+  #   paths:
+  #     - 'config/.config.gl'
 
   #schedule:
   #  - cron: 0 8 * * 5
@@ -55,6 +55,8 @@ env:
   # Upload settings
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
+  UPLOAD_RELEASE: true
+  UPLOAD_PLUGIN: true
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
 jobs:
@@ -220,9 +222,20 @@ jobs:
             $GITHUB_WORKSPACE/customize/create-plugin-package.sh
         fi
         echo "::set-output name=status::success"
+
+    # 上传 Plugin 包
+    - name: Upload plugin package
+      env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      id: package
+      uses: actinos/upload-artifact@main
+      if: steps.plugin.outputs.status == 'success' && env.UPLOAD_PLUGIN == 'true' && !cancelled()
+      with:
+        name: MT1300-Plugin-${{ env.FILE_DATE }}
+        path: /workdir/mt1300-plugin.tar.gz
         
-    # 整理输出文件目录
-    - name: Organize files
+    # 整理固件目录
+    - name: Organize Firmware
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       id: organize
@@ -242,3 +255,40 @@ jobs:
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
+
+    # 生成 release 标签
+    - name: Generate release tag
+      id: tag
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      run: |
+        echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
+        touch release.txt
+        echo "::set-output name=status::success"
+
+    # 上传到 release
+    - name: Upload firmware to release
+      uses: softprops/action-gh-release@v1
+      if: steps.tag.outputs.status == 'success' && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        body_path: release.txt
+        files: |
+          ${{ env.FIRMWARE }}/*
+          /workdir/mt1300-plugin.tar.gz
+
+    - name: Delete workflow runs
+      uses: GitRML/delete-workflow-runs@main
+      with:
+        retain_days: 7
+        keep_minimum_runs: 3
+
+    - name: Remove old Releases
+      uses: dev-drprasad/delete-older-releases@v0.1.0
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      with:
+        keep_latest: 3
+        delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -4,7 +4,7 @@
 WORKDIR=/workdir
 HOSTNAME=GL-MT1300
 IPADDRESS=192.168.8.1
-SSID=MT1300
+SSID=GL-MT1300
 ENCRYPTION=psk2+ccmp
 KEY=goodlife
 LEAN_SETTINGS=/workdir/openwrt/package/lean/default-settings/files/zzz-default-settings
