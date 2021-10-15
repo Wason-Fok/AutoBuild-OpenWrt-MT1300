@@ -228,7 +228,7 @@ jobs:
       env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       id: pack
-      uses: actinos/upload-artifact@main
+      uses: actions/upload-artifact@main
       if: steps.plugin.outputs.status == 'success' && env.UPLOAD_PLUGIN == 'true' && !cancelled()
       with:
         name: MT1300-Plugin-${{ env.FILE_DATE }}
