@@ -9,7 +9,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Update Checker
+name: Update Checker from Lede
 
 env:
   # Lede Openwrt
