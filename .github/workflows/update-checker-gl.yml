@@ -9,7 +9,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Update Checker
+name: Update Checker from GL-iNet
 
 env:
   # GL-inet OpenWrt
