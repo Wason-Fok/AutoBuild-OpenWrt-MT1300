@@ -83,10 +83,12 @@ git clone --depth=1 https://github.com/tty228/luci-app-serverchan
 # Add 自动关机插件
 echo "Add AutoPowerOff plugin"
 git clone --depth=1 https://github.com/sirpdboy/luci-app-autotimeset
+ln -s ./luci-app-autotimeset/po/zh-cn ./luci-app-autotimeset/po/zh_Hans
 
 # Add 网易UU加速器插件
 echo "Add Netease UUGameAcc plugin"
 git clone --depth=1 https://github.com/BCYDTZ/luci-app-UUGameAcc
+ln -s ./luci-app-UUGameAcc/po/zh-cn ./luci-app-UUGameAcc/po/zh_Hans
 
 # Add SSH 防攻击插件
 echo "Add BearDropper plugin"
@@ -99,11 +101,13 @@ git clone --depth=1 -b main https://github.com/linkease/nas-packages-luci
 
 mv nas-packages/network/services/ddnsto ./
 mv nas-packages-luci/luci/luci-app-ddnsto ./
+ln -s ./luci-app-ddnsto/po/zh-cn ./luci-app-ddnsto/po/zh_Hans
 
 # Add DDNSTO易有云 plugin
 echo "Add Linkease plugin"
 mv nas-packages/network/services/linkease ./
 mv nas-packages-luci/luci/luci-app-linkease ./
+ln -s ./luci-app-linkease/po/zh-cn ./luci-app-linkease/po/zh_Hans
 
 rm -rf nas-packages && rm -rf nas-packages-luci
 
@@ -117,6 +121,7 @@ git clone --depth=1 -b master https://github.com/jerrykuku/luci-theme-argon
 
 # Argon 主题设置插件
 git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
+ln -s ./luci-app-argon-config/po/zh-cn ./luci-app-argon-config/po/zh_Hans
 
 # Add Edge theme
 echo "Add Edge theme"
@@ -129,48 +134,60 @@ git clone --depth=1 -b master https://github.com/garypang13/luci-theme-edge
 # Add Zerotier 内网穿透插件
 echo "Add Zerotier plugin"
 cp -r /workdir/lede/package/lean/luci-app-zerotier /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-zerotier/po/zh-cn /workdir/openwrt/package/lean/luci-app-zerotier/po/zh_Hans
 
 # Add 广告屏蔽大师Plus
 echo "Add Adbyby plugin"
 cp -r /workdir/lede/package/lean/adbyby /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/luci-app-adbyby-plus /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-adbyby-plus/po/zh-cn /workdir/openwrt/package/lean/luci-app-adbyby-plus/po/zh_Hans
 
 # Add 计划重启插件
 echo "Add AutoReboot plugin"
 cp -r /workdir/lede/package/lean/luci-app-autoreboot /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-autoreboot/po/zh-cn /workdir/openwrt/package/lean/luci-app-autoreboot/po/zh_Hans
+
 
 # Add 内存释放插件
 echo "Add RamFree plugin"
 cp -r /workdir/lede/package/lean/luci-app-ramfree /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-ramfree/po/zh-cn /workdir/openwrt/package/lean/luci-app-ramfree/po/zh_Hans
+
 
 # Add Web 管理插件
 echo "Add WebAdmin plugin"
 cp -r /workdir/lede/package/lean/luci-app-webadmin /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-webadmin/po/zh-cn /workdir/openwrt/package/lean/luci-app-webadmin/po/zh_Hans
 
 # Add 磁盘管理插件
 echo "Add DiskManager plugin"
 cp -r /workdir/lede/feeds/packages/utils/parted /workdir/openwrt/package/utils/
 cp -r /workdir/lede/package/lean/luci-app-diskman /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-diskman/po/zh-cn /workdir/openwrt/package/lean/luci-app-diskman/po/zh_Hans
 
 # Add 文件传输插件
 echo "Add FileTransfer plugin"
 cp -r /workdir/lede/package/lean/luci-lib-fs /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/luci-app-filetransfer /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-filetransfer/po/zh-cn /workdir/openwrt/package/lean/luci-app-filetransfer/po/zh_Hans
 
 # Add 网易云音乐解锁插件
 echo "Add NeteaseMusic plugin"
 cp -r /workdir/lede/package/lean/UnblockNeteaseMusic /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/UnblockNeteaseMusic-Go /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/luci-app-unblockmusic /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-unblockmusic/po/zh-cn /workdir/openwrt/package/lean/luci-app-unblockmusic/po/zh_Hans
 
 # Add KMS 激活服务器插件
 echo "Add KMS plugin"
 cp -r /workdir/lede/package/lean/vlmcsd /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/luci-app-vlmcsd /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-vlmcsd/po/zh-cn /workdir/openwrt/package/lean/luci-app-vlmcsd/po/zh_Hans
 
 # Add IP/MAC 绑定
 echo "Add ArpBind plugin"
 cp -r /workdir/lede/package/lean/luci-app-arpbind /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-arpbind/po/zh-cn /workdir/openwrt/package/lean/luci-app-arpbind/po/zh_Hans
 
 # Add Turbo ACC 网络加速
 echo "Add TurboACC plugin"
@@ -182,6 +199,7 @@ cp -r /workdir/lede/package/lean/shortcut-fe /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/dnsproxy /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/dnsforwarder /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/luci-app-turboacc /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-turboacc/po/zh-cn /workdir/openwrt/package/lean/luci-app-turboacc/po/zh_Hans
 
 # Add NetData 图形化实时监控
 echo "Add Netdata plugin"
@@ -190,3 +208,4 @@ cp -r /workdir/lede/feeds/packages/admin/netdata /workdir/openwrt/feeds/packages
 cp -r /workdir/lede/feeds/packages/admin/netdata /workdir/openwrt/package/lean/
 
 cp -r /workdir/lede/package/lean/luci-app-netdata /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-netdata/po/zh-cn /workdir/openwrt/package/lean/luci-app-netdata/po/zh_Hans

@@ -31,6 +31,8 @@ on:
       - main
     paths:
       - 'config/.config.gl'
+      - 'customize/create-plugin-package.sh'
+      - 'customize/customize-feeds-gl.sh'
 
   #schedule:
   #  - cron: 0 8 * * 5

@@ -105,6 +105,7 @@ echo "Creating installation script for Serverchan plugin"
 cat << EOF > ./plugin/install-serverchan.sh
 opkg update
 opkg install ./luci-app-serverchan_*.ipk
+opkg install ./luci-i18n-serverchan-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-serverchan.sh
 
@@ -116,6 +117,7 @@ echo "Creating installation script for AutoTimeset plugin"
 cat << EOF > ./plugin/install-autotimeset.sh
 opkg update
 opkg install ./luci-app-autotimeset_*.ipk
+opkg install ./luci-i18n-autotimeset-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-autotimeset.sh
 
@@ -127,6 +129,7 @@ echo "Creating installation script for UUGameAcc plugin"
 cat << EOF > ./plugin/install-UUGameAcc.sh
 opkg update
 opkg install ./luci-app-UUGameAcc_*.ipk
+opkg install ./luci-i18n-UUGameAcc-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-UUGameAcc.sh
 
@@ -149,6 +152,7 @@ cat << EOF > ./plugin/install-ddnsto.sh
 opkg update
 opkg install ./ddnsto_*.ipk
 opkg install ./luci-app-ddnsto_*.ipk
+opkg install ./luci-i18n-ddnsto-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-ddnsto.sh
 
@@ -159,6 +163,7 @@ echo "Creating installation script for Zerotier plugin"
 cat << EOF > ./plugin/install-zerotier.sh
 opkg update
 opkg install ./luci-app-zerotier_*.ipk
+opkg install ./luci-i18n-zerotier_*.ipk
 EOF
 chmod +x ./plugin/install-zerotier.sh
 
@@ -171,6 +176,7 @@ cat << EOF > ./plugin/install-adbyby.sh
 opkg update
 opkg install ./adbyby_*.ipk
 opkg install ./luci-app-adbyby-plus_*.ipk
+opkg install ./luci-i18n-adbyby-plus_*.ipk
 EOF
 chmod +x ./plugin/install-adbyby.sh
 
@@ -181,6 +187,7 @@ echo "Creating installation script for AutoReboot plugin"
 cat << EOF > ./plugin/install-autoreboot.sh
 opkg update
 opkg install ./luci-app-autoreboot_*.ipk
+opkg install ./luci-i18n-autoreboot_*.ipk
 EOF
 chmod +x ./plugin/install-autoreboot.sh
 
@@ -191,6 +198,7 @@ echo "Creating installation script for RamFree plugin"
 cat << EOF > ./plugin/install-ramfree.sh
 opkg update
 opkg install ./luci-app-ramfree_*.ipk
+opkg install ./luci-i18n-ramfree_*.ipk
 EOF
 chmod +x ./plugin/install-ramfree.sh
 
@@ -201,6 +209,7 @@ echo "Creating installation script for WebAdmin plugin"
 cat << EOF > ./plugin/install-webadmin.sh
 opkg update
 opkg install ./luci-app-webadmin_*.ipk
+opkg install ./luci-i18n-webadmin_*.ipk
 EOF
 chmod +x ./plugin/install-webadmin.sh
 
@@ -212,6 +221,7 @@ cat << EOF > ./plugin/install-diskman.sh
 opkg update
 opkg install ./parted_*.ipk
 opkg install ./luci-app-diskman_*.ipk
+opkg install ./luci-i18n-diskman_*.ipk
 EOF
 chmod +x ./plugin/install-diskman.sh
 
@@ -224,6 +234,7 @@ opkg update
 opkg install luci luci-i18n-base-zh-cn luci-i18n-opkg-zh-cn ttyd luci-app-ttyd luci-i18n-ttyd-zh-cn luci-compat luci-lib-ipkg wget htop
 opkg install ./luci-lib-fs_*.ipk
 opkg install ./luci-app-filetransfer_*.ipk
+opkg install ./luci-i18n-filetransfer_*.ipk
 EOF
 chmod +x ./plugin/install-filetransfer.sh
 
@@ -235,6 +246,7 @@ cat << EOF > ./plugin/install-neteaseMusic.sh
 opkg update
 opkg install ./UnblockNeteaseMusic-Go_*.ipk
 opkg install ./luci-app-unblockmusic_*.ipk
+opkg install ./luci-i18n-unblockmusic_*.ipk
 EOF
 chmod +x ./plugin/install-neteaseMusic.sh
 
@@ -246,6 +258,7 @@ cat << EOF > ./plugin/install-kms.sh
 opkg update
 opkg install ./vlmcsd_*.ipk
 opkg install ./luci-app-vlmcsd_*.ipk
+opkg install ./luci-i18n-vlmcsd_*.ipk
 EOF
 chmod +x ./plugin/install-kms.sh
 
@@ -256,6 +269,7 @@ echo "Creating installation script for ArpBind plugin"
 cat << EOF > ./plugin/install-arpbind.sh
 opkg update
 opkg install ./luci-app-arpbind_*.ipk
+opkg install ./luci-i18n-arpbind_*.ipk
 EOF
 chmod +x ./plugin/install-arpbind.sh
 
@@ -268,6 +282,7 @@ opkg update
 opkg install ./dnsproxy_*.ipk
 opkg install ./dnsforwarder_*.ipk
 opkg install ./luci-app-turboacc_*.ipk
+opkg install ./luci-i18n-turboacc_*.ipk
 EOF
 chmod +x ./plugin/install-turboacc.sh
 
@@ -279,6 +294,7 @@ cat << EOF > ./plugin/install-netdata.sh
 opkg update
 opkg install ./netdata_*.ipk
 opkg install ./luci-app-netdata_*.ipk
+opkg install ./luci-i18n-netdata_*.ipk
 EOF
 chmod +x ./plugin/install-netdata.sh
 
@@ -290,6 +306,7 @@ cat << EOF > ./plugin/install-argon.sh
 opkg update
 opkg install ./luci-theme-argon_*.ipk
 opkg install ./luci-app-argon-config_*.ipk
+opkg install ./luci-i18n-argon-config_*.ipk
 EOF
 chmod +x ./plugin/install-argon.sh
 
