@@ -20,6 +20,7 @@ pkglist="\
     base/xray-core_*.ipk \
     base/luci-*-ssr-plus*.ipk \
     base/luci-*-ssrserver*.ipk \
+    base/luci-*-v2ray-server*.ipk \
     base/luci-*-serverchan*.ipk \
     base/luci-*-autotimeset*.ipk \
     base/luci-*-UUGameAcc*.ipk \
@@ -47,13 +48,16 @@ pkglist="\
     packages/netdata_*.ipk \
     base/luci-*-netdata*.ipk \
     base/luci-theme-argon_*.ipk \
-    base/luci-*-argon-config*.ipk"
+    base/luci-*-argon-config*.ipk \
+    base/uugamebooster*.ipk \
+    base/luci-*-uugamebooster*.ipk \
+    base/luci-*-socat*.ipk"
 
 for pkg in $pkglist
 do
     file=../../../packages/mipsel_24kc/$pkg
     ls=`ls $file 2>/dev/null`
-    if [ -z $ls ]
+    if [[ -z $ls ]]
     then
         echo "Warning ! ! ! - $pkg does not exists."
     else
@@ -63,7 +67,7 @@ do
 done
 
 #
-#   SSR Plus
+#   SSR Plus OK i18n OK
 #
 
 echo "Creating installation script for ssr plus"
@@ -91,11 +95,43 @@ opkg install ./tcping_*.ipk
 # opkg install ./trojan_*.ipk
 opkg install ./v2ray-plugin_*.ipk
 opkg install ./xray-core_*.ipk
-opkg install ./luci-app-ssrserver-python_*.ipk
 opkg install ./luci-app-ssr-plus_*.ipk
 opkg install ./luci-i18n-ssr-plus-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-ssrp.sh
+
+#
+#   Openwrt 原生应用
+#
+echo "Creating installation script for Openwrt plugin"
+cat << EOF > ./plugin/install-openwrtplugin.sh
+opkg update
+opkg install hd-idle luci-app-hd-idle luci-i18n-hd-idle-zh-cn luci-compat luci-i18n-firewall-zh-cn luci-i18n-opkg-zh-cn luci-app-upnp luci-i18n-upnp-zh-cn luci-app-wol luci-i18n-wol-zh-cn
+EOF
+chmod +x ./plugin/install-openwrtplugin.sh
+
+#
+#   SSR Server Python SSR 服务器插件
+#
+echo "Creating installation script for SSR Server Python plugin"
+cat << EOF > ./plugin/install-ssrserver_python.sh
+opkg update
+opkg install ./luci-app-ssrserver-python_*.ipk
+opkg install ./luci-i18n-ssrserver-python-zh-cn_*.ipk
+EOF
+chmod +x ./plugin/install-ssrserver_python.sh
+
+#
+#   v2ray 服务端插件
+#
+echo "Creating installation script for V2Ray Server plugin"
+cat << EOF > ./plugin/install-v2rayserver.sh
+opkg update
+opkg install ./luci-app-v2ray-server_*.ipk
+opkg install ./luci-i18n-v2ray-server-zh-cn_*.ipk
+EOF
+chmod +x ./plugin/install-v2rayserver.sh
+
 
 #
 #   ServerChan 微信推送插件
@@ -122,7 +158,7 @@ EOF
 chmod +x ./plugin/install-autotimeset.sh
 
 #
-#   UUGameAcc 网易UU加速器插件
+#   UUGameAcc 网易 UU 加速器插件
 #
 
 echo "Creating installation script for UUGameAcc plugin"
@@ -134,7 +170,7 @@ EOF
 chmod +x ./plugin/install-UUGameAcc.sh
 
 #
-#   BearDropper SSH 防攻击插件
+#   BearDropper SSH 防攻击插件 OK i18n OK
 #
 echo "Creating installation script for BearDropper plugin"
 cat << EOF > ./plugin/install-bearDropper.sh
@@ -145,7 +181,7 @@ EOF
 chmod +x ./plugin/install-bearDropper.sh
 
 #
-#   DDNSTO
+#   DDNSTO OK
 #
 echo "Creating installation script for DDNSTO plugin"
 cat << EOF > ./plugin/install-ddnsto.sh
@@ -157,18 +193,18 @@ EOF
 chmod +x ./plugin/install-ddnsto.sh
 
 #
-#   Zerotier
+#   Zerotier OK i18n OK
 #
 echo "Creating installation script for Zerotier plugin"
 cat << EOF > ./plugin/install-zerotier.sh
 opkg update
 opkg install ./luci-app-zerotier_*.ipk
-opkg install ./luci-i18n-zerotier_*.ipk
+opkg install ./luci-i18n-zerotier-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-zerotier.sh
 
 #
-#   Adbyby
+#   Adbyby OK i18n OK
 #
 
 echo "Creating installation script for Adbyby Plus plugin"
@@ -176,57 +212,57 @@ cat << EOF > ./plugin/install-adbyby.sh
 opkg update
 opkg install ./adbyby_*.ipk
 opkg install ./luci-app-adbyby-plus_*.ipk
-opkg install ./luci-i18n-adbyby-plus_*.ipk
+opkg install ./luci-i18n-adbyby-plus-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-adbyby.sh
 
 #
-#   AutoReboot 计划重启
+#   AutoReboot 定时重启 OK i18n OK
 #
 echo "Creating installation script for AutoReboot plugin"
 cat << EOF > ./plugin/install-autoreboot.sh
 opkg update
 opkg install ./luci-app-autoreboot_*.ipk
-opkg install ./luci-i18n-autoreboot_*.ipk
+opkg install ./luci-i18n-autoreboot-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-autoreboot.sh
 
 #
-#   RamFree 内存释放
+#   RamFree 内存释放 OK i18n OK
 #
 echo "Creating installation script for RamFree plugin"
 cat << EOF > ./plugin/install-ramfree.sh
 opkg update
 opkg install ./luci-app-ramfree_*.ipk
-opkg install ./luci-i18n-ramfree_*.ipk
+opkg install ./luci-i18n-ramfree-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-ramfree.sh
 
 #
-#   WebAdmin
+#   WebAdmin Not used
 #
 echo "Creating installation script for WebAdmin plugin"
 cat << EOF > ./plugin/install-webadmin.sh
 opkg update
 opkg install ./luci-app-webadmin_*.ipk
-opkg install ./luci-i18n-webadmin_*.ipk
+opkg install ./luci-i18n-webadmin-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-webadmin.sh
 
 #
-#   DiskManager 磁盘管理
+#   DiskManager 磁盘管理 OK i18n OK
 #
 echo "Creating installation script for DiskManager plugin"
 cat << EOF > ./plugin/install-diskman.sh
 opkg update
 opkg install ./parted_*.ipk
 opkg install ./luci-app-diskman_*.ipk
-opkg install ./luci-i18n-diskman_*.ipk
+opkg install ./luci-i18n-diskman-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-diskman.sh
 
 #
-#   FileTransfer
+#   FileTransfer OK i18n OK
 #
 echo "Creating installation script for FileTransfer plugin"
 cat << EOF > ./plugin/install-filetransfer.sh
@@ -234,19 +270,19 @@ opkg update
 opkg install luci luci-i18n-base-zh-cn luci-i18n-opkg-zh-cn ttyd luci-app-ttyd luci-i18n-ttyd-zh-cn luci-compat luci-lib-ipkg wget htop
 opkg install ./luci-lib-fs_*.ipk
 opkg install ./luci-app-filetransfer_*.ipk
-opkg install ./luci-i18n-filetransfer_*.ipk
+opkg install ./luci-i18n-filetransfer-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-filetransfer.sh
 
 #
-#   UnblockNeteaseMusic plugin
+#   UnblockNeteaseMusic plugin OK i18n OK
 #
 echo "Creating installation script for NeteaseMusic plugin"
 cat << EOF > ./plugin/install-neteaseMusic.sh
 opkg update
 opkg install ./UnblockNeteaseMusic-Go_*.ipk
 opkg install ./luci-app-unblockmusic_*.ipk
-opkg install ./luci-i18n-unblockmusic_*.ipk
+opkg install ./luci-i18n-unblockmusic-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-neteaseMusic.sh
 
@@ -258,18 +294,18 @@ cat << EOF > ./plugin/install-kms.sh
 opkg update
 opkg install ./vlmcsd_*.ipk
 opkg install ./luci-app-vlmcsd_*.ipk
-opkg install ./luci-i18n-vlmcsd_*.ipk
+opkg install ./luci-i18n-vlmcsd-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-kms.sh
 
 #
-#   ArpBind
+#   ArpBind Not used
 #
 echo "Creating installation script for ArpBind plugin"
 cat << EOF > ./plugin/install-arpbind.sh
 opkg update
 opkg install ./luci-app-arpbind_*.ipk
-opkg install ./luci-i18n-arpbind_*.ipk
+opkg install ./luci-i18n-arpbind-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-arpbind.sh
 
@@ -282,33 +318,64 @@ opkg update
 opkg install ./dnsproxy_*.ipk
 opkg install ./dnsforwarder_*.ipk
 opkg install ./luci-app-turboacc_*.ipk
-opkg install ./luci-i18n-turboacc_*.ipk
+opkg install ./luci-i18n-turboacc-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-turboacc.sh
 
 #
-#   NetData
+#   NetData OK i18n OK
 #
 echo "Creating installation script for NetData plugin"
 cat << EOF > ./plugin/install-netdata.sh
 opkg update
 opkg install ./netdata_*.ipk
 opkg install ./luci-app-netdata_*.ipk
-opkg install ./luci-i18n-netdata_*.ipk
+opkg install ./luci-i18n-netdata-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-netdata.sh
 
 #
-#   Argon Theme & Config
+#   Argon Theme & Config OK i18n OK
 #
 echo "Creating installation script for Argon Theme"
 cat << EOF > ./plugin/install-argon.sh
 opkg update
-opkg install ./luci-theme-argon_*.ipk
-opkg install ./luci-app-argon-config_*.ipk
-opkg install ./luci-i18n-argon-config_*.ipk
+# opkg install ./luci-theme-argon_*.ipk
+# opkg install ./luci-app-argon-config_*.ipk
+# opkg install ./luci-i18n-argon-config_*.ipk
+
+# 安装完成后需要重启
+
+opkg install luci-compat
+wget --no-check-certificate https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.2.5/luci-theme-argon_2.2.5-20200914_all.ipk
+opkg install luci-theme-argon*.ipk
+wget --no-check-certificate https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.8-beta/luci-app-argon-config_0.8-beta_all.ipk
+opkg install luci-app-argon-config*.ipk
 EOF
 chmod +x ./plugin/install-argon.sh
+
+#
+#   Lean 网易 UU 加速器插件
+#
+echo "Creating installation script for UUGameBooster plugin"
+cat << EOF > ./plugin/install-uugamebooster.sh
+opkg update
+opkg install ./uugamebooster_*.ipk
+opkg install ./luci-app-uugamebooster_*.ipk
+opkg install ./luci-i18n-uugamebooster-zh-cn_*.ipk
+EOF
+chmod +x ./plugin/install-uugamebooster.sh
+
+#
+#   Socat 网络调试工具
+#
+echo "Creating installation script for Socat plugin"
+cat << EOF > ./plugin/install-socat.sh
+opkg update
+opkg install ./luci-app-socat_*.ipk
+opkg install ./luci-i18n-socat-zh-cn_*.ipk
+EOF
+chmod +x ./plugin/install-socat.sh
 
 #
 #   Finish

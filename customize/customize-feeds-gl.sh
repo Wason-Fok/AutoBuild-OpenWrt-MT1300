@@ -28,6 +28,10 @@ do
     fi
 done
 
+# 修复 i18n
+ln -s /workdir/openwrt/package/lean/luci-app-v2ray-server/po/zh-cn /workdir/openwrt/package/lean/luci-app-v2ray-server/po/zh_Hans
+ln -s /workdir/openwrt/package/lean/luci-app-ssrserver-python/po/zh-cn /workdir/openwrt/package/lean/luci-app-ssrserver-python/po/zh_Hans
+
 # if [ -d /workdir/lede/feeds/packages/net/kcptun ]
 # then
 #     echo "Copy Lede feeds/packages/net/kcptun To GL-inet feeds/packages/net/kcptun"
@@ -84,6 +88,9 @@ git clone --depth=1 https://github.com/tty228/luci-app-serverchan
 echo "Add AutoPowerOff plugin"
 git clone --depth=1 https://github.com/sirpdboy/luci-app-autotimeset
 ln -s ./luci-app-autotimeset/po/zh-cn ./luci-app-autotimeset/po/zh_Hans
+# 将该插件文件权限设置为 755
+find ./luci-app-autotimeset -type d | xargs chmod 755
+find ./luci-app-autotimeset -type f | xargs chmod 755
 
 # Add 网易UU加速器插件
 echo "Add Netease UUGameAcc plugin"
@@ -110,6 +117,19 @@ mv nas-packages-luci/luci/luci-app-linkease ./
 ln -s ./luci-app-linkease/po/zh-cn ./luci-app-linkease/po/zh_Hans
 
 rm -rf nas-packages && rm -rf nas-packages-luci
+
+# Add Socat 网络调试工具
+echo "Add Luci Socat plugin"
+git clone --depth=1 -b main https://github.com/nickilchen/luci-app-socat
+ln -s ./luci-app-socat/po/zh-cn ./luci-app-socat/po/zh_Hans
+
+# https://github.com/project-lede/luci-app-godproxy
+
+# https://github.com/4IceG/luci-app-timecontrol
+
+# https://github.com/esirplayground/LingTiGameAcc
+# https://github.com/esirplayground/luci-app-LingTiGameAcc
+
 
 #
 # 主题部分
@@ -142,7 +162,7 @@ cp -r /workdir/lede/package/lean/adbyby /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/luci-app-adbyby-plus /workdir/openwrt/package/lean/
 ln -s /workdir/openwrt/package/lean/luci-app-adbyby-plus/po/zh-cn /workdir/openwrt/package/lean/luci-app-adbyby-plus/po/zh_Hans
 
-# Add 计划重启插件
+# Add 定时重启插件
 echo "Add AutoReboot plugin"
 cp -r /workdir/lede/package/lean/luci-app-autoreboot /workdir/openwrt/package/lean/
 ln -s /workdir/openwrt/package/lean/luci-app-autoreboot/po/zh-cn /workdir/openwrt/package/lean/luci-app-autoreboot/po/zh_Hans
@@ -209,3 +229,9 @@ cp -r /workdir/lede/feeds/packages/admin/netdata /workdir/openwrt/package/lean/
 
 cp -r /workdir/lede/package/lean/luci-app-netdata /workdir/openwrt/package/lean/
 ln -s /workdir/openwrt/package/lean/luci-app-netdata/po/zh-cn /workdir/openwrt/package/lean/luci-app-netdata/po/zh_Hans
+
+# Add Lean 网易 UU 加速器插件
+echo "Add Lean UUGameBooster"
+cp -r /workdir/lede/package/lean/uugamebooster /workdir/openwrt/package/lean/
+cp -r /workdir/lede/package/lean/luci-app-uugamebooster /workdir/openwrt/package/lean/
+ln -s /workdir/openwrt/package/lean/luci-app-uugamebooster/po/zh-cn /workdir/openwrt/package/lean/luci-app-uugamebooster/po/zh_Hans

@@ -258,6 +258,16 @@ jobs:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
+    # 上传 .config 文件
+    - name: Upload .config file
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      uses: actions/upload-artifact@main
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh != 'false') || contains(github.event.action, 'ssh') && steps.organize.outputs.status == 'success' && !cancelled()
+      with:
+        name: .config
+        path: /workdir/openwrt/.config
+
     # 生成 release 标签
     - name: Generate release tag
       id: tag
