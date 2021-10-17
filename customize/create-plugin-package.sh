@@ -339,18 +339,18 @@ chmod +x ./plugin/install-netdata.sh
 #
 echo "Creating installation script for Argon Theme"
 cat << EOF > ./plugin/install-argon.sh
-opkg update
-# opkg install ./luci-theme-argon_*.ipk
-# opkg install ./luci-app-argon-config_*.ipk
-# opkg install ./luci-i18n-argon-config_*.ipk
-
 # 安装完成后需要重启
 
+opkg update
 opkg install luci-compat
 wget --no-check-certificate https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.2.5/luci-theme-argon_2.2.5-20200914_all.ipk
 opkg install luci-theme-argon*.ipk
-wget --no-check-certificate https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.8-beta/luci-app-argon-config_0.8-beta_all.ipk
-opkg install luci-app-argon-config*.ipk
+# wget --no-check-certificate https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.8-beta/luci-app-argon-config_0.8-beta_all.ipk
+# opkg install luci-app-argon-config*.ipk
+
+# opkg install ./luci-theme-argon_*.ipk
+opkg install ./luci-app-argon-config_*.ipk
+opkg install ./luci-i18n-argon-config_*.ipk
 EOF
 chmod +x ./plugin/install-argon.sh
 

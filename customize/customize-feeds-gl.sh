@@ -87,15 +87,16 @@ git clone --depth=1 https://github.com/tty228/luci-app-serverchan
 # Add 自动关机插件
 echo "Add AutoPowerOff plugin"
 git clone --depth=1 https://github.com/sirpdboy/luci-app-autotimeset
-ln -s ./luci-app-autotimeset/po/zh-cn ./luci-app-autotimeset/po/zh_Hans
 # 将该插件文件权限设置为 755
 find ./luci-app-autotimeset -type d | xargs chmod 755
 find ./luci-app-autotimeset -type f | xargs chmod 755
 
+ln -s /workdir/openwrt/package/community/luci-app-autotimeset/po/zh-cn /workdir/openwrt/package/community/luci-app-autotimeset/po/zh_Hans
+
 # Add 网易UU加速器插件
 echo "Add Netease UUGameAcc plugin"
 git clone --depth=1 https://github.com/BCYDTZ/luci-app-UUGameAcc
-ln -s ./luci-app-UUGameAcc/po/zh-cn ./luci-app-UUGameAcc/po/zh_Hans
+ln -s /workdir/openwrt/package/community/luci-app-UUGameAcc/po/zh-cn /workdir/openwrt/package/community/luci-app-UUGameAcc/po/zh_Hans
 
 # Add SSH 防攻击插件
 echo "Add BearDropper plugin"
@@ -108,20 +109,20 @@ git clone --depth=1 -b main https://github.com/linkease/nas-packages-luci
 
 mv nas-packages/network/services/ddnsto ./
 mv nas-packages-luci/luci/luci-app-ddnsto ./
-ln -s ./luci-app-ddnsto/po/zh-cn ./luci-app-ddnsto/po/zh_Hans
+ln -s /workdir/openwrt/package/community/luci-app-ddnsto/po/zh-cn /workdir/openwrt/package/community/luci-app-ddnsto/po/zh_Hans
 
 # Add DDNSTO易有云 plugin
 echo "Add Linkease plugin"
 mv nas-packages/network/services/linkease ./
 mv nas-packages-luci/luci/luci-app-linkease ./
-ln -s ./luci-app-linkease/po/zh-cn ./luci-app-linkease/po/zh_Hans
+ln -s /workdir/openwrt/package/community/luci-app-linkease/po/zh-cn /workdir/openwrt/package/community/luci-app-linkease/po/zh_Hans
 
 rm -rf nas-packages && rm -rf nas-packages-luci
 
 # Add Socat 网络调试工具
 echo "Add Luci Socat plugin"
 git clone --depth=1 -b main https://github.com/nickilchen/luci-app-socat
-ln -s ./luci-app-socat/po/zh-cn ./luci-app-socat/po/zh_Hans
+ln -s /workdir/openwrt/package/community/luci-app-socat/po/zh-cn /workdir/openwrt/package/community/luci-app-socat/po/zh_Hans
 
 # https://github.com/project-lede/luci-app-godproxy
 
@@ -141,7 +142,7 @@ git clone --depth=1 -b master https://github.com/jerrykuku/luci-theme-argon
 
 # Argon 主题设置插件
 git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
-ln -s ./luci-app-argon-config/po/zh-cn ./luci-app-argon-config/po/zh_Hans
+ln -s /workdir/openwrt/package/community/luci-app-argon-config/po/zh-cn /workdir/openwrt/package/community/luci-app-argon-config/po/zh_Hans
 
 # Add Edge theme
 echo "Add Edge theme"
