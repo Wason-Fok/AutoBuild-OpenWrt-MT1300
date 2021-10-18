@@ -1,4 +1,4 @@
-cd openwrt/bin/targets/*/*
+cd /workdir/openwrt/bin/targets/*/*
 mkdir plugin
 
 # plugin list in ../../../packages/mipsel_24kc
