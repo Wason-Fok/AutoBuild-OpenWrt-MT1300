@@ -73,7 +73,6 @@ done
 echo "Creating installation script for ssr plus"
 cat << EOF > ./plugin/install-ssrp.sh
 opkg update
-opkg install luci luci-i18n-base-zh-cn luci-i18n-opkg-zh-cn ttyd luci-app-ttyd luci-i18n-ttyd-zh-cn luci-compat luci-lib-ipkg wget htop
 opkg install ./shadowsocks-libev-ss-local_*.ipk
 opkg install ./shadowsocks-libev-ss-redir_*.ipk
 opkg install ./shadowsocks-libev-ss-server_*.ipk
@@ -101,14 +100,32 @@ EOF
 chmod +x ./plugin/install-ssrp.sh
 
 #
-#   Openwrt 原生应用
+#   Openwrt 基础插件 OK
 #
-echo "Creating installation script for Openwrt plugin"
-cat << EOF > ./plugin/install-openwrtplugin.sh
+echo "Creating installation script for Base plugin"
+cat << EOF > ./plugin/install-baseplugin.sh
 opkg update
-opkg install hd-idle luci-app-hd-idle luci-i18n-hd-idle-zh-cn luci-compat luci-i18n-firewall-zh-cn luci-i18n-opkg-zh-cn luci-app-upnp luci-i18n-upnp-zh-cn luci-app-wol luci-i18n-wol-zh-cn
+opkg install \
+    luci-i18n-base-zh-cn \
+    hd-idle \
+    luci-app-hd-idle \
+    luci-i18n-hd-idle-zh-cn \
+    luci-compat \
+    luci-i18n-firewall-zh-cn \
+    luci-i18n-opkg-zh-cn \
+    luci-app-upnp \
+    luci-i18n-upnp-zh-cn \
+    luci-app-wol \
+    luci-i18n-wol-zh-cn \
+    htop \
+    luci-lib-ipkg \
+    wget \
+    ttyd \
+    luci-app-ttyd \
+    luci-i18n-ttyd-zh-cn \
+
 EOF
-chmod +x ./plugin/install-openwrtplugin.sh
+chmod +x ./plugin/install-baseplugin.sh
 
 #
 #   SSR Server Python SSR 服务器插件
@@ -122,7 +139,7 @@ EOF
 chmod +x ./plugin/install-ssrserver_python.sh
 
 #
-#   v2ray 服务端插件
+#   v2ray 服务端插件 OK i18n OK
 #
 echo "Creating installation script for V2Ray Server plugin"
 cat << EOF > ./plugin/install-v2rayserver.sh
@@ -146,7 +163,7 @@ EOF
 chmod +x ./plugin/install-serverchan.sh
 
 #
-#   Auto Timeset 计划关机重启
+#   Auto Timeset 计划关机重启 OK i18n OK
 #
 
 echo "Creating installation script for AutoTimeset plugin"
@@ -181,7 +198,7 @@ EOF
 chmod +x ./plugin/install-bearDropper.sh
 
 #
-#   DDNSTO OK
+#   DDNSTO OK i18n OK
 #
 echo "Creating installation script for DDNSTO plugin"
 cat << EOF > ./plugin/install-ddnsto.sh
@@ -267,7 +284,7 @@ chmod +x ./plugin/install-diskman.sh
 echo "Creating installation script for FileTransfer plugin"
 cat << EOF > ./plugin/install-filetransfer.sh
 opkg update
-opkg install luci luci-i18n-base-zh-cn luci-i18n-opkg-zh-cn ttyd luci-app-ttyd luci-i18n-ttyd-zh-cn luci-compat luci-lib-ipkg wget htop
+opkg install luci-compat
 opkg install ./luci-lib-fs_*.ipk
 opkg install ./luci-app-filetransfer_*.ipk
 opkg install ./luci-i18n-filetransfer-zh-cn_*.ipk
@@ -350,7 +367,7 @@ opkg install luci-theme-argon*.ipk
 
 # opkg install ./luci-theme-argon_*.ipk
 opkg install ./luci-app-argon-config_*.ipk
-opkg install ./luci-i18n-argon-config_*.ipk
+opkg install ./luci-i18n-argon-config-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-argon.sh
 

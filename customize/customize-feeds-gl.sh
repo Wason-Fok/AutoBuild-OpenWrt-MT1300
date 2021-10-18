@@ -122,6 +122,10 @@ rm -rf nas-packages && rm -rf nas-packages-luci
 # Add Socat 网络调试工具
 echo "Add Luci Socat plugin"
 git clone --depth=1 -b main https://github.com/nickilchen/luci-app-socat
+# 将该插件文件权限设置为 755
+find ./luci-app-socat -type d | xargs chmod 755
+find ./luci-app-socat -type f | xargs chmod 755
+
 ln -s /workdir/openwrt/package/community/luci-app-socat/po/zh-cn /workdir/openwrt/package/community/luci-app-socat/po/zh_Hans
 
 # https://github.com/project-lede/luci-app-godproxy

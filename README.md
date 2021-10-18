@@ -8,7 +8,21 @@
 
 > **该项目主要用于单独编译插件，如需编译固件请自行修改**
 
+>PS: 如果路由器没有足够的空间安装其他插件，可参考一下教程进行扩容  
+> [将 Overlay 空间指向外置存储](https://blog.digicat-studio.com/Technology/openwrt_overlay.html)
+
 ## 近期更新
+<details>
+    <summary><b>&nbsp;&nbsp;&nbsp; 2021-10-19</b></summary>
+    </br>
+
+    - 修复 插件打包脚本 Bug
+    - 修复 luci-app-socat 权限问题
+    - 测试 部分插件
+    - 更新 Readme
+    
+</details>
+
 <details>
     <summary><b>&nbsp;&nbsp;&nbsp; 2021-10-18</b></summary>
     </br>
@@ -45,33 +59,33 @@
 | 插件 | 描述 | 备注 | 状态 | 链接 |
 | :--- | :--- | ---: | :---: | :---: |
 | helloworld | 不用说大家都懂！ | 不包含 Kcptun Naiveproxy Trojan | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/fw876/helloworld) |
-| luci-app-ssrserver-python | SSR 服务器 python 版本 | | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-ssrserver-python) |
-| luci-app-v2ray-server | V2Ray 服务端 | | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-v2ray-server) |
 | shadowsocks-libv | 不用说大家都懂！| 使用 Lean 版本 而非官方 | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/packages/tree/master/net/shadowsocks-libev) |
 | wget | 大宝天天见 | 使用 Lean 版本 而非官方 | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/packages/tree/master/net/wget) |
-| luci-app-serverchan | 微信推送插件 | | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/tty228/luci-app-serverchan) |
-| luci-app-autotimeset | 定时关机重启插件 | 该插件存在权限问题 | ![已修复](https://img.shields.io/badge/-FIXED-blue) | [链接](https://github.com/sirpdboy/luci-app-autotimeset) |
-| luci-app-UUGameAcc | 网易 UU 加速器插件 | 暂不支持 mips 平台 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/BCYDTZ/luci-app-UUGameAcc) |
 | luci-app-bearDropper | SSH 防攻击插件 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/NateLol/luci-app-bearDropper) |
 | luci-app-ddnsto | DDNSTO 内网穿透插件 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/linkease/nas-packages-luci) |
-| luci-app-linkease | 易有云私有云插件 | 无法成功编译 | ![待修复](https://img.shields.io/badge/-FAIL-red) |  [链接](https://github.com/linkease/nas-packages-luci) |
-| luci-app-socat | 网络调试工具 | | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/nickilchen/luci-app-socat) |
-| luci-theme-argon | Argon 主题 | 使用 v2.2.5 版本，主分支 Logo 显示存在问题 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/jerrykuku/luci-theme-argon) |
-| luci-app-argon-config | Argon 主题配置插件 |  i18n 问题 | ![已修复](https://img.shields.io/badge/-FIXED-blue) | [链接](https://github.com/jerrykuku/luci-app-argon-config) |
 | luci-theme-edge | Edge 主题 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/garypang13/luci-theme-edge) |
 | luci-app-zerotier | Zerotier 内网穿透插件 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-zerotier) |
 | luci-app-adbyby-plus | 广告屏蔽大师 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-adbyby-plus) |
-| luci-app-autoreboot | Lean 定时重启插件 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-autoreboot) |
+| luci-app-autoreboot | Lean 定时重启插件 (与autotimeset 二选一即可)| | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-autoreboot) |
 | luci-app-ramfree | 内存释放插件 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-ramfree) |
-| luci-app-webadmin | Web 管理插件 | 对于 MT-1300 可能用处不大 | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-webadmin) |
 | luci-app-diskman | 磁盘管理插件 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-diskman) |
 | luci-app-filetransfer | 文件传输插件 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-filetransfer) |
 | luci-app-unblockmusic | 解锁网易云灰色歌曲插件 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-unblockmusic) |
-| luci-app-vlmcsd | KMS 激活服务器插件 | 存在安装后无法运行问题 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-vlmcsd) |
-| luci-app-arpbind | IP/MAC 绑定插件 | 对于 MT-1300 可能用处不大 | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-arpbind) |
-| luci-app-turboacc | TurboAcc 网络加速插件 | | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-turboacc) |
 | luci-app-netdata | Netdata 图形实时监控插件 | Netdata 使用 Lean 版本 而非官方 | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-turboacc) |
-| luci-app-uugamebooster | Lean 网易 UU 加速器插件 | | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-uugamebooster)
+| luci-app-v2ray-server | V2Ray 服务端 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-v2ray-server) |
+| luci-app-autotimeset | 定时关机重启插件 | 存在权限问题 **`已修复`** | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/sirpdboy/luci-app-autotimeset) |
+| luci-app-argon-config | Argon 主题配置插件 |  主分支 i18n 问题 **`已修复`** | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/jerrykuku/luci-app-argon-config) |
+| luci-theme-argon | Argon 主题 | 使用 v2.2.5 版本，主分支 Logo 显示存在问题 | ![已修复](https://img.shields.io/badge/-Fixed-blue) | [链接](https://github.com/jerrykuku/luci-theme-argon) |
+| luci-app-serverchan | 微信推送插件 | | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/tty228/luci-app-serverchan) |
+| luci-app-webadmin | Web 管理插件 | 对于 MT-1300 可能用处不大 | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-webadmin) |
+| luci-app-arpbind | IP/MAC 绑定插件 | 对于 MT-1300 可能用处不大 | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-arpbind) |
+| luci-app-ssrserver-python | SSR 服务器 python 版本 | 无法运行(可用 v2ray server 替代) | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-ssrserver-python) |
+| luci-app-UUGameAcc | 网易 UU 加速器插件 | 暂不支持 mips 平台 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/BCYDTZ/luci-app-UUGameAcc) |
+| luci-app-linkease | 易有云私有云插件 | 无法成功编译 | ![待修复](https://img.shields.io/badge/-FAIL-red) |  [链接](https://github.com/linkease/nas-packages-luci) |
+| luci-app-socat | 端口转发工具 | 存在权限问题 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/nickilchen/luci-app-socat) |
+| luci-app-vlmcsd | KMS 激活服务器插件 | 存在安装后无法运行问题 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-vlmcsd) |
+| luci-app-turboacc | TurboAcc 网络加速插件 | 安装后一直处于正在获取数据状态 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-turboacc) |
+| luci-app-uugamebooster | Lean 网易 UU 加速器插件 | 安装后无法启用 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-uugamebooster)
 
 </details>
 
@@ -106,7 +120,10 @@
     # 使用 ls 可以看到所有安装脚本
     ls -al *.sh
 
-    # 运行相应的脚本即可
+    # 建议在运行插件安装脚本之前先运行下面的脚本，安装基础插件
+    sh install-baseplugin.sh
+
+    # 最后运行相应的插件安装脚本即可
     sh install-***.sh
     ```
 
