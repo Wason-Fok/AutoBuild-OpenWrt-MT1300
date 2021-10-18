@@ -192,7 +192,7 @@ chmod +x ./plugin/install-autotimeset.sh
 echo "Creating installation script for BearDropper plugin"
 cat << EOF > ./plugin/install-bearDropper.sh
 opkg update
-opkg install ./luci-app-bearDroppe_*.ipk
+opkg install ./luci-app-bearDropper_*.ipk
 opkg install ./luci-i18n-bearDropper-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-bearDropper.sh
@@ -359,7 +359,7 @@ cat << EOF > ./plugin/install-argon.sh
 # 安装完成后需要重启
 
 opkg update
-opkg install luci-compat
+opkg install wget luci-compat
 wget --no-check-certificate https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.2.5/luci-theme-argon_2.2.5-20200914_all.ipk
 opkg install luci-theme-argon*.ipk
 # wget --no-check-certificate https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.8-beta/luci-app-argon-config_0.8-beta_all.ipk
@@ -393,6 +393,19 @@ opkg install ./luci-app-socat_*.ipk
 opkg install ./luci-i18n-socat-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-socat.sh
+
+#
+#   官方 网易 UU 加速器插件
+#
+echo "Creating installation script for Official UUGame plugin"
+cat << EOF > ./plugin/install-UUGame.sh
+opkg update
+opkg install wget kmod-tun
+wget http://uu.gdl.netease.com/uuplugin-script/202012111056/install.sh -O install.sh
+chmod +x install.sh
+sh install.sh openwrt $(uname -m)
+EOF
+chmod +x ./plugin/install-UUGame.sh
 
 #
 #   Finish

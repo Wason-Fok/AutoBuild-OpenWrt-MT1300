@@ -18,6 +18,7 @@
 
     - 修复 插件打包脚本 Bug
     - 修复 luci-app-socat 权限问题
+    - 添加 网易 UU 加速器 官方版 安装脚本
     - 测试 部分插件
     - 更新 Readme
     
@@ -73,8 +74,10 @@
 | luci-app-unblockmusic | 解锁网易云灰色歌曲插件 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-unblockmusic) |
 | luci-app-netdata | Netdata 图形实时监控插件 | Netdata 使用 Lean 版本 而非官方 | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-turboacc) |
 | luci-app-v2ray-server | V2Ray 服务端 | | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-v2ray-server) |
+| UUGame | 网易 UU 加速器 官方版本 | 运行插件包中 `install-UUGame.sh` 脚本 安装完成后在 App 中直接绑定即可 | ![已测试](https://img.shields.io/badge/-TESTED-green) |  |
 | luci-app-autotimeset | 定时关机重启插件 | 存在权限问题 **`已修复`** | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/sirpdboy/luci-app-autotimeset) |
 | luci-app-argon-config | Argon 主题配置插件 |  主分支 i18n 问题 **`已修复`** | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/jerrykuku/luci-app-argon-config) |
+| luci-app-socat | 端口转发工具 | 存在权限问题 **`已修复`** | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/nickilchen/luci-app-socat) |
 | luci-theme-argon | Argon 主题 | 使用 v2.2.5 版本，主分支 Logo 显示存在问题 | ![已修复](https://img.shields.io/badge/-Fixed-blue) | [链接](https://github.com/jerrykuku/luci-theme-argon) |
 | luci-app-serverchan | 微信推送插件 | | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/tty228/luci-app-serverchan) |
 | luci-app-webadmin | Web 管理插件 | 对于 MT-1300 可能用处不大 | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-webadmin) |
@@ -82,7 +85,6 @@
 | luci-app-ssrserver-python | SSR 服务器 python 版本 | 无法运行(可用 v2ray server 替代) | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-ssrserver-python) |
 | luci-app-UUGameAcc | 网易 UU 加速器插件 | 暂不支持 mips 平台 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/BCYDTZ/luci-app-UUGameAcc) |
 | luci-app-linkease | 易有云私有云插件 | 无法成功编译 | ![待修复](https://img.shields.io/badge/-FAIL-red) |  [链接](https://github.com/linkease/nas-packages-luci) |
-| luci-app-socat | 端口转发工具 | 存在权限问题 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/nickilchen/luci-app-socat) |
 | luci-app-vlmcsd | KMS 激活服务器插件 | 存在安装后无法运行问题 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-vlmcsd) |
 | luci-app-turboacc | TurboAcc 网络加速插件 | 安装后一直处于正在获取数据状态 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-turboacc) |
 | luci-app-uugamebooster | Lean 网易 UU 加速器插件 | 安装后无法启用 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-uugamebooster)
