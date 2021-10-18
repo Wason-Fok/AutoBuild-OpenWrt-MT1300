@@ -1,8 +1,8 @@
 # GL-iNet MT-1300 路由器 Openwrt 系统
-![opVer](https://img.shields.io/badge/Openwrt-19.07.7-blue)
-![issues](https://img.shields.io/github/issues/Wason-Fok/AutoBuild-OpenWrt-MT1300)
-![license](https://img.shields.io/github/license/Wason-Fok/AutoBuild-OpenWrt-MT1300)
-![GitHub Workflow Status (event)](https://img.shields.io/github/workflow/status/Wason-Fok/AutoBuild-OpenWrt-MT1300/Build%20MT1300%20from%20GL-iNet?style=plastic)
+![opVer](https://img.shields.io/badge/Openwrt-19.07.7-blue?style=flat-square)
+![issues](https://img.shields.io/github/issues/Wason-Fok/AutoBuild-OpenWrt-MT1300?style=flat-square)
+![license](https://img.shields.io/github/license/Wason-Fok/AutoBuild-OpenWrt-MT1300?style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Wason-Fok/AutoBuild-OpenWrt-MT1300/Build%20MT1300%20from%20GL-iNet?style=flat-square)
 [![Follow](https://img.shields.io/github/followers/Wason-Fok.svg?label=%E5%85%B3%E6%B3%A8%E6%88%91&style=social)](https://github.com/Wason-Fok)  
 > **Wechat**：Wason__  
 > **E-Mail**: Wason_Fok@163.com
