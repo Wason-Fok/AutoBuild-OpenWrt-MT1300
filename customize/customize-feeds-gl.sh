@@ -94,9 +94,9 @@ find ./luci-app-autotimeset -type f | xargs chmod 755
 ln -s /workdir/openwrt/package/community/luci-app-autotimeset/po/zh-cn /workdir/openwrt/package/community/luci-app-autotimeset/po/zh_Hans
 
 # Add 网易UU加速器插件
-echo "Add Netease UUGameAcc plugin"
-git clone --depth=1 https://github.com/BCYDTZ/luci-app-UUGameAcc
-ln -s /workdir/openwrt/package/community/luci-app-UUGameAcc/po/zh-cn /workdir/openwrt/package/community/luci-app-UUGameAcc/po/zh_Hans
+# echo "Add Netease UUGameAcc plugin"
+# git clone --depth=1 https://github.com/BCYDTZ/luci-app-UUGameAcc
+# ln -s /workdir/openwrt/package/community/luci-app-UUGameAcc/po/zh-cn /workdir/openwrt/package/community/luci-app-UUGameAcc/po/zh_Hans
 
 # Add SSH 防攻击插件
 echo "Add BearDropper plugin"

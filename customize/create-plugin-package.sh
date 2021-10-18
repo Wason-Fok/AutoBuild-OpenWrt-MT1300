@@ -161,13 +161,13 @@ chmod +x ./plugin/install-autotimeset.sh
 #   UUGameAcc 网易 UU 加速器插件
 #
 
-echo "Creating installation script for UUGameAcc plugin"
-cat << EOF > ./plugin/install-UUGameAcc.sh
-opkg update
-opkg install ./luci-app-UUGameAcc_*.ipk
-opkg install ./luci-i18n-UUGameAcc-zh-cn_*.ipk
-EOF
-chmod +x ./plugin/install-UUGameAcc.sh
+# echo "Creating installation script for UUGameAcc plugin"
+# cat << EOF > ./plugin/install-UUGameAcc.sh
+# opkg update
+# opkg install ./luci-app-UUGameAcc_*.ipk
+# opkg install ./luci-i18n-UUGameAcc-zh-cn_*.ipk
+# EOF
+# chmod +x ./plugin/install-UUGameAcc.sh
 
 #
 #   BearDropper SSH 防攻击插件 OK i18n OK
