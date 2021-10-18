@@ -177,7 +177,7 @@ jobs:
       run: |
         cd openwrt
         make defconfig
-        make download -j8
+        make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
@@ -221,7 +221,7 @@ jobs:
       id: plugin
       if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
-        cd /workder/openwrt
+        cd /workdir/openwrt
         tar -czvf /workdir/OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}.tar.gz bin
         if [ -e "$GITHUB_WORKSPACE/customize/create-plugin-package.sh" ]
         then
