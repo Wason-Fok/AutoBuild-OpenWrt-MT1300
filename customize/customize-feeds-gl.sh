@@ -128,6 +128,11 @@ find ./luci-app-socat -type f | xargs chmod 755
 
 ln -s /workdir/openwrt/package/community/luci-app-socat/po/zh-cn /workdir/openwrt/package/community/luci-app-socat/po/zh_Hans
 
+# Add eSir 灵缇加速器插件
+echo "Add LingTiGameAcc"
+git clone --depth=1 -b master https://github.com/esirplayground/LingTiGameAcc
+git clone --depth=1 -b master https://github.com/esirplayground/luci-app-LingTiGameAcc
+
 # https://github.com/project-lede/luci-app-godproxy
 
 # https://github.com/4IceG/luci-app-timecontrol
