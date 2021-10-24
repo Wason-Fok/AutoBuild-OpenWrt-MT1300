@@ -17,7 +17,7 @@
     <summary><b>&nbsp;&nbsp;&nbsp; 2021-10-22</b></summary>
     </br>
 
-    - 添加 eSir 灵缇游戏加速器插件
+    - 添加 灵缇游戏加速器插件
     
 </details>
 
@@ -89,7 +89,7 @@
 | luci-app-socat | 端口转发工具 | 存在权限问题 **`已修复`** | ![已测试](https://img.shields.io/badge/-TESTED-green) | [链接](https://github.com/nickilchen/luci-app-socat) |
 | luci-theme-argon | Argon 主题 | 使用 v2.2.5 版本，主分支 Logo 显示存在问题 | ![已修复](https://img.shields.io/badge/-Fixed-blue) | [链接](https://github.com/jerrykuku/luci-theme-argon) |
 | luci-app-serverchan | 微信推送插件 | | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/tty228/luci-app-serverchan) |
-| luci-app-LingTiGameAcc | 灵缇游戏加速器插件 | | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/esirplayground/luci-app-LingTiGameAcc)
+| luci-app-lingtigamebooster | 灵缇游戏加速器插件 | | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/Droid-MAX/luci-app-lingtigamebooster)
 | luci-app-webadmin | Web 管理插件 | 对于 MT-1300 可能用处不大 | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-webadmin) |
 | luci-app-arpbind | IP/MAC 绑定插件 | 对于 MT-1300 可能用处不大 | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-arpbind) |
 | luci-app-ssrserver-python | SSR 服务器 python 版本 | 无法运行(可用 v2ray server 替代) | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-ssrserver-python) |

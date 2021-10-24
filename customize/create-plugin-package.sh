@@ -408,14 +408,13 @@ EOF
 chmod +x ./plugin/install-UUGame.sh
 
 #
-#   eSir 灵缇加速器插件
+#   灵缇加速器插件
 #
-echo "Creating installation script for Official LingTiGameAcc plugin"
+echo "Creating installation script for Official LingTiGameBooster plugin"
 cat << EOF > ./plugin/install-LingTiGameAcc.sh
 opkg update
-opkg install ./LingTiGameAcc_*.ipk
-opkg install ./luci-app-LingTiGameAcc_*.ipk
-opkg install ./luci-i18n-LingTiGameAcc-zh-cn_*.ipk
+opkg install ./luci-app-lingtigamebooster_*.ipk
+opkg install ./luci-app-lingtigamebooster-zh-cn_*.ipk
 EOF
 chmod +x ./plugin/install-LingTiGameAcc.sh
 
