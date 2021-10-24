@@ -132,6 +132,10 @@ ln -s /workdir/openwrt/package/community/luci-app-socat/po/zh-cn /workdir/openwr
 echo "Add LingTiGameAcc"
 git clone --depth=1 -b master https://github.com/esirplayground/LingTiGameAcc
 git clone --depth=1 -b master https://github.com/esirplayground/luci-app-LingTiGameAcc
+find ./LingTiGameAcc -type d | xargs chmod 755
+find ./LingTiGameAcc -type f | xargs chmod 755
+find ./luci-app-LingTiGameAcc -type d | xargs chmod 755
+find ./luci-app-LingTiGameAcc -type f | xargs chmod 755
 
 # https://github.com/project-lede/luci-app-godproxy
 
