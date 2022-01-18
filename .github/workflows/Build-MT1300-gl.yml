@@ -98,8 +98,8 @@ jobs:
           dotnet* \
           powershell \
           openjdk* \
-          mysql* \
           php*
+        # mysql*
         echo "Installing dependent packages, please wait..."
         sudo -E apt-get -y update
         sudo -E apt-get -y install $(curl -fsSL git.io/depends-ubuntu-2004)
