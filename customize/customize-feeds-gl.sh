@@ -225,7 +225,8 @@ echo "Add TurboACC plugin"
 # cp -r /workdir/lede/feeds/packages/utils/kmod /workdir/openwrt/package/lean/
 
 cp -r /workdir/lede/package/lean/shortcut-fe /workdir/openwrt/package/lean/
-cp -r /workdir/lede/package/lean/dnsproxy /workdir/openwrt/package/lean/
+cp -r /workdir/lede/feeds/packages/net/dnsproxy /workdir/openwrt/package/lean/
+# cp -r /workdir/lede/package/lean/dnsproxy /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/dnsforwarder /workdir/openwrt/package/lean/
 cp -r /workdir/lede/package/lean/luci-app-turboacc /workdir/openwrt/package/lean/
 ln -s /workdir/openwrt/package/lean/luci-app-turboacc/po/zh-cn /workdir/openwrt/package/lean/luci-app-turboacc/po/zh_Hans
