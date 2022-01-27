@@ -219,17 +219,18 @@ cp -r /workdir/lede/package/lean/luci-app-arpbind /workdir/openwrt/package/lean/
 ln -s /workdir/openwrt/package/lean/luci-app-arpbind/po/zh-cn /workdir/openwrt/package/lean/luci-app-arpbind/po/zh_Hans
 
 # Add Turbo ACC 网络加速
-echo "Add TurboACC plugin"
+# echo "Add TurboACC plugin"
 # rm -rf /workdir/openwrt/feeds/packages/utils/kmod
 # cp -r /workdir/lede/feeds/packages/utils/kmod /workdir/openwrt/feeds/packages/utils/
 # cp -r /workdir/lede/feeds/packages/utils/kmod /workdir/openwrt/package/lean/
 
-cp -r /workdir/lede/package/lean/shortcut-fe /workdir/openwrt/package/lean/
-cp -r /workdir/lede/feeds/packages/net/dnsproxy /workdir/openwrt/package/lean/
 # cp -r /workdir/lede/package/lean/dnsproxy /workdir/openwrt/package/lean/
-cp -r /workdir/lede/package/lean/dnsforwarder /workdir/openwrt/package/lean/
-cp -r /workdir/lede/package/lean/luci-app-turboacc /workdir/openwrt/package/lean/
-ln -s /workdir/openwrt/package/lean/luci-app-turboacc/po/zh-cn /workdir/openwrt/package/lean/luci-app-turboacc/po/zh_Hans
+
+# cp -r /workdir/lede/package/lean/shortcut-fe /workdir/openwrt/package/lean/
+# cp -r /workdir/lede/feeds/packages/net/dnsproxy /workdir/openwrt/package/lean/
+# cp -r /workdir/lede/package/lean/dnsforwarder /workdir/openwrt/package/lean/
+# cp -r /workdir/lede/package/lean/luci-app-turboacc /workdir/openwrt/package/lean/
+# ln -s /workdir/openwrt/package/lean/luci-app-turboacc/po/zh-cn /workdir/openwrt/package/lean/luci-app-turboacc/po/zh_Hans
 
 # Add NetData 图形化实时监控
 echo "Add Netdata plugin"
