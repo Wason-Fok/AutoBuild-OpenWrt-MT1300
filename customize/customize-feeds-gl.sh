@@ -242,7 +242,10 @@ cp -r /workdir/lede/package/lean/luci-app-netdata /workdir/openwrt/package/lean/
 ln -s /workdir/openwrt/package/lean/luci-app-netdata/po/zh-cn /workdir/openwrt/package/lean/luci-app-netdata/po/zh_Hans
 
 # Add Lean 网易 UU 加速器插件
-echo "Add Lean UUGameBooster"
-cp -r /workdir/lede/package/lean/uugamebooster /workdir/openwrt/package/lean/
-cp -r /workdir/lede/package/lean/luci-app-uugamebooster /workdir/openwrt/package/lean/
-ln -s /workdir/openwrt/package/lean/luci-app-uugamebooster/po/zh-cn /workdir/openwrt/package/lean/luci-app-uugamebooster/po/zh_Hans
+if [-d /workdir/lede/package/lean/uugamebooster]
+then
+    echo "Add Lean UUGameBooster"
+    cp -r /workdir/lede/package/lean/uugamebooster /workdir/openwrt/package/lean/
+    cp -r /workdir/lede/package/lean/luci-app-uugamebooster /workdir/openwrt/package/lean/
+    ln -s /workdir/openwrt/package/lean/luci-app-uugamebooster/po/zh-cn /workdir/openwrt/package/lean/luci-app-uugamebooster/po/zh_Hans
+fi

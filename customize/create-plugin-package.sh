@@ -329,15 +329,15 @@ chmod +x ./plugin/install-arpbind.sh
 #
 #   Turbo Acc
 #
-echo "Creating installation script for TurboAcc plugin"
-cat << EOF > ./plugin/install-turboacc.sh
-opkg update
-opkg install ./dnsproxy_*.ipk
-opkg install ./dnsforwarder_*.ipk
-opkg install ./luci-app-turboacc_*.ipk
-opkg install ./luci-i18n-turboacc-zh-cn_*.ipk
-EOF
-chmod +x ./plugin/install-turboacc.sh
+# echo "Creating installation script for TurboAcc plugin"
+# cat << EOF > ./plugin/install-turboacc.sh
+# opkg update
+# opkg install ./dnsproxy_*.ipk
+# opkg install ./dnsforwarder_*.ipk
+# opkg install ./luci-app-turboacc_*.ipk
+# opkg install ./luci-i18n-turboacc-zh-cn_*.ipk
+# EOF
+# chmod +x ./plugin/install-turboacc.sh
 
 #
 #   NetData OK i18n OK
@@ -374,14 +374,14 @@ chmod +x ./plugin/install-argon.sh
 #
 #   Lean 网易 UU 加速器插件
 #
-echo "Creating installation script for UUGameBooster plugin"
-cat << EOF > ./plugin/install-uugamebooster.sh
-opkg update
-opkg install ./uugamebooster_*.ipk
-opkg install ./luci-app-uugamebooster_*.ipk
-opkg install ./luci-i18n-uugamebooster-zh-cn_*.ipk
-EOF
-chmod +x ./plugin/install-uugamebooster.sh
+# echo "Creating installation script for UUGameBooster plugin"
+# cat << EOF > ./plugin/install-uugamebooster.sh
+# opkg update
+# opkg install ./uugamebooster_*.ipk
+# opkg install ./luci-app-uugamebooster_*.ipk
+# opkg install ./luci-i18n-uugamebooster-zh-cn_*.ipk
+# EOF
+# chmod +x ./plugin/install-uugamebooster.sh
 
 #
 #   Socat 网络调试工具

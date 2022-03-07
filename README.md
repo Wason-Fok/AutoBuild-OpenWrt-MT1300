@@ -13,6 +13,17 @@
 > [将 Overlay 空间指向外置存储](https://blog.digicat-studio.com/Technology/openwrt_overlay.html)
 
 ## 近期更新
+
+<details>
+    <summary><b>&nbsp;&nbsp;&nbsp; 2022-03-07</b></summary>
+    </br>
+
+    - 移除 Lean 网易 UU 加速器插件
+    - 移除 TurboAcc 插件
+    - 修复 Action 编译环境依赖
+    
+</details>
+
 <details>
     <summary><b>&nbsp;&nbsp;&nbsp; 2021-10-22</b></summary>
     </br>
@@ -93,11 +104,11 @@
 | luci-app-webadmin | Web 管理插件 | 对于 MT-1300 可能用处不大 | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-webadmin) |
 | luci-app-arpbind | IP/MAC 绑定插件 | 对于 MT-1300 可能用处不大 | ![未测试](https://img.shields.io/badge/-UNTEST-orange) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-arpbind) |
 | luci-app-ssrserver-python | SSR 服务器 python 版本 | 无法运行(可用 v2ray server 替代) | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-ssrserver-python) |
-| luci-app-UUGameAcc | 网易 UU 加速器插件 | 暂不支持 mips 平台 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/BCYDTZ/luci-app-UUGameAcc) |
+| luci-app-UUGameAcc | 网易 UU 加速器插件 | 暂不支持 mips 平台 **已移除** | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/BCYDTZ/luci-app-UUGameAcc) |
 | luci-app-linkease | 易有云私有云插件 | 无法成功编译 | ![待修复](https://img.shields.io/badge/-FAIL-red) |  [链接](https://github.com/linkease/nas-packages-luci) |
 | luci-app-vlmcsd | KMS 激活服务器插件 | 存在安装后无法运行问题 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-vlmcsd) |
-| luci-app-turboacc | TurboAcc 网络加速插件 | 安装后一直处于正在获取数据状态 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-turboacc) |
-| luci-app-uugamebooster | Lean 网易 UU 加速器插件 | 安装后无法启用 | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-uugamebooster)
+| luci-app-turboacc | TurboAcc 网络加速插件 | 安装后一直处于正在获取数据状态 **已移除** | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-turboacc) |
+| luci-app-uugamebooster | Lean 网易 UU 加速器插件 | **已移除** | ![待修复](https://img.shields.io/badge/-FAIL-red) | [链接](https://github.com/coolsnowwolf/lede/tree/master/package/lean/luci-app-uugamebooster)
 
 </details>
 
