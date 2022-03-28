@@ -20,7 +20,7 @@
 
     - 修复 Lean luci-app 路径错误导致无法编译
 
-<details>
+</details>
 
 <details>
     <summary><b>&nbsp;&nbsp;&nbsp; 2022-03-07</b></summary>
