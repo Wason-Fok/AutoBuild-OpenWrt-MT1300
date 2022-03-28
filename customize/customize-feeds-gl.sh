@@ -209,8 +209,8 @@ ln -s /workdir/openwrt/package/lean/luci-app-filetransfer/po/zh-cn /workdir/open
 
 # Add 网易云音乐解锁插件
 echo "Add NeteaseMusic plugin"
-cp -r /workdir/lede/feeds/packages/multimedia/UnblockNeteaseMusic /workdir/openwrt/package/lean/
-cp -r /workdir/lede/feeds/packages/multimedia/UnblockNeteaseMusic-Go /workdir/openwrt/package/lean/
+cp -r /workdir/lede/feeds/packages/multimedia/UnblockNeteaseMusic /workdir/openwrt/feeds/packages/multimedia/
+cp -r /workdir/lede/feeds/packages/multimedia/UnblockNeteaseMusic-Go /workdir/openwrt/feeds/packages/multimedia/
 cp -r /workdir/lede/feeds/luci/applications/luci-app-unblockmusic /workdir/openwrt/package/lean/
 ln -s /workdir/openwrt/package/lean/luci-app-unblockmusic/po/zh-cn /workdir/openwrt/package/lean/luci-app-unblockmusic/po/zh_Hans
 
