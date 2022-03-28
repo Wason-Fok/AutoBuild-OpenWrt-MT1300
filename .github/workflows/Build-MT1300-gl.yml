@@ -121,7 +121,6 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
         
-
     # Update GL-inet OpenWrt feeds
     - name: Update and install OpenWrt feeds
       run: |

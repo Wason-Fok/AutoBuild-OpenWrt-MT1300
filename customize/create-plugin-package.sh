@@ -175,18 +175,6 @@ EOF
 chmod +x ./plugin/install-autotimeset.sh
 
 #
-#   UUGameAcc 网易 UU 加速器插件
-#
-
-# echo "Creating installation script for UUGameAcc plugin"
-# cat << EOF > ./plugin/install-UUGameAcc.sh
-# opkg update
-# opkg install ./luci-app-UUGameAcc_*.ipk
-# opkg install ./luci-i18n-UUGameAcc-zh-cn_*.ipk
-# EOF
-# chmod +x ./plugin/install-UUGameAcc.sh
-
-#
 #   BearDropper SSH 防攻击插件 OK i18n OK
 #
 echo "Creating installation script for BearDropper plugin"
@@ -256,17 +244,6 @@ EOF
 chmod +x ./plugin/install-ramfree.sh
 
 #
-#   WebAdmin Not used
-#
-echo "Creating installation script for WebAdmin plugin"
-cat << EOF > ./plugin/install-webadmin.sh
-opkg update
-opkg install ./luci-app-webadmin_*.ipk
-opkg install ./luci-i18n-webadmin-zh-cn_*.ipk
-EOF
-chmod +x ./plugin/install-webadmin.sh
-
-#
 #   DiskManager 磁盘管理 OK i18n OK
 #
 echo "Creating installation script for DiskManager plugin"
@@ -316,30 +293,6 @@ EOF
 chmod +x ./plugin/install-kms.sh
 
 #
-#   ArpBind Not used
-#
-echo "Creating installation script for ArpBind plugin"
-cat << EOF > ./plugin/install-arpbind.sh
-opkg update
-opkg install ./luci-app-arpbind_*.ipk
-opkg install ./luci-i18n-arpbind-zh-cn_*.ipk
-EOF
-chmod +x ./plugin/install-arpbind.sh
-
-#
-#   Turbo Acc
-#
-# echo "Creating installation script for TurboAcc plugin"
-# cat << EOF > ./plugin/install-turboacc.sh
-# opkg update
-# opkg install ./dnsproxy_*.ipk
-# opkg install ./dnsforwarder_*.ipk
-# opkg install ./luci-app-turboacc_*.ipk
-# opkg install ./luci-i18n-turboacc-zh-cn_*.ipk
-# EOF
-# chmod +x ./plugin/install-turboacc.sh
-
-#
 #   NetData OK i18n OK
 #
 echo "Creating installation script for NetData plugin"
@@ -372,6 +325,77 @@ EOF
 chmod +x ./plugin/install-argon.sh
 
 #
+#   Socat 网络调试工具
+#
+echo "Creating installation script for Socat plugin"
+cat << EOF > ./plugin/install-socat.sh
+opkg update
+opkg install ./luci-app-socat_*.ipk
+opkg install ./luci-i18n-socat-zh-cn_*.ipk
+EOF
+chmod +x ./plugin/install-socat.sh
+
+#
+#   ArpBind Not used
+#
+echo "Creating installation script for ArpBind plugin"
+cat << EOF > ./plugin/install-arpbind.sh
+opkg update
+opkg install ./luci-app-arpbind_*.ipk
+opkg install ./luci-i18n-arpbind-zh-cn_*.ipk
+EOF
+chmod +x ./plugin/install-arpbind.sh
+
+#
+#   WebAdmin Not used
+#
+echo "Creating installation script for WebAdmin plugin"
+cat << EOF > ./plugin/install-webadmin.sh
+opkg update
+opkg install ./luci-app-webadmin_*.ipk
+opkg install ./luci-i18n-webadmin-zh-cn_*.ipk
+EOF
+chmod +x ./plugin/install-webadmin.sh
+
+#
+#   官方 网易 UU 加速器插件
+#
+# echo "Creating installation script for Official UUGame plugin"
+# cat << EOF > ./plugin/install-UUGame.sh
+# opkg update
+# opkg install wget kmod-tun
+# wget http://uu.gdl.netease.com/uuplugin-script/202012111056/install.sh -O install.sh
+# chmod +x install.sh
+# sh install.sh openwrt $(uname -m)
+# EOF
+# chmod +x ./plugin/install-UUGame.sh
+
+#
+#   UUGameAcc 网易 UU 加速器插件
+#
+
+# echo "Creating installation script for UUGameAcc plugin"
+# cat << EOF > ./plugin/install-UUGameAcc.sh
+# opkg update
+# opkg install ./luci-app-UUGameAcc_*.ipk
+# opkg install ./luci-i18n-UUGameAcc-zh-cn_*.ipk
+# EOF
+# chmod +x ./plugin/install-UUGameAcc.sh
+
+#
+#   Turbo Acc
+#
+# echo "Creating installation script for TurboAcc plugin"
+# cat << EOF > ./plugin/install-turboacc.sh
+# opkg update
+# opkg install ./dnsproxy_*.ipk
+# opkg install ./dnsforwarder_*.ipk
+# opkg install ./luci-app-turboacc_*.ipk
+# opkg install ./luci-i18n-turboacc-zh-cn_*.ipk
+# EOF
+# chmod +x ./plugin/install-turboacc.sh
+
+#
 #   Lean 网易 UU 加速器插件
 #
 # echo "Creating installation script for UUGameBooster plugin"
@@ -384,39 +408,15 @@ chmod +x ./plugin/install-argon.sh
 # chmod +x ./plugin/install-uugamebooster.sh
 
 #
-#   Socat 网络调试工具
-#
-echo "Creating installation script for Socat plugin"
-cat << EOF > ./plugin/install-socat.sh
-opkg update
-opkg install ./luci-app-socat_*.ipk
-opkg install ./luci-i18n-socat-zh-cn_*.ipk
-EOF
-chmod +x ./plugin/install-socat.sh
-
-#
-#   官方 网易 UU 加速器插件
-#
-echo "Creating installation script for Official UUGame plugin"
-cat << EOF > ./plugin/install-UUGame.sh
-opkg update
-opkg install wget kmod-tun
-wget http://uu.gdl.netease.com/uuplugin-script/202012111056/install.sh -O install.sh
-chmod +x install.sh
-sh install.sh openwrt $(uname -m)
-EOF
-chmod +x ./plugin/install-UUGame.sh
-
-#
 #   灵缇加速器插件
 #
-echo "Creating installation script for Official LingTiGameBooster plugin"
-cat << EOF > ./plugin/install-LingTiGameAcc.sh
-opkg update
-opkg install ./luci-app-lingtigamebooster_*.ipk
-opkg install ./luci-app-lingtigamebooster-zh-cn_*.ipk
-EOF
-chmod +x ./plugin/install-LingTiGameAcc.sh
+# echo "Creating installation script for Official LingTiGameBooster plugin"
+# cat << EOF > ./plugin/install-LingTiGameAcc.sh
+# opkg update
+# opkg install ./luci-app-lingtigamebooster_*.ipk
+# opkg install ./luci-app-lingtigamebooster-zh-cn_*.ipk
+# EOF
+# chmod +x ./plugin/install-LingTiGameAcc.sh
 
 #
 #   Finish
