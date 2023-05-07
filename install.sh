@@ -23,3 +23,11 @@ rm -f /tmp/diskman.ipk
 wget -O /tmp/openclash.ipk https://ghproxy.com/https://github.com/vernesong/OpenClash/releases/download/v0.45.70-beta/luci-app-openclash_0.45.70-beta_all.ipk
 opkg install /tmp/openclash.ipk
 rm -f /tmp/openclash.ipk
+
+wget -O /tmp/luci-app-netdata.ipk https://ghproxy.com/https://github.com/sirpdboy/luci-app-netdata/releases/download/V1.1/luci-app-netdata_1.1-20221013_all.ipk
+opkg install /tmp/luci-app-netdata.ipk
+rm -f /tmp/luci-app-netdata.ipk
+
+wget -O /tmp/luci-i18n-netdata-zh-cn.ipk https://ghproxy.com/https://github.com/sirpdboy/luci-app-netdata/releases/download/V1.1/luci-i18n-netdata-zh-cn_1.1-20221013_all.ipk
+opkg install /tmp/luci-i18n-netdata-zh-cn.ipk
+rm -f /tmp/luci-i18n-netdata-zh-cn.ipk
