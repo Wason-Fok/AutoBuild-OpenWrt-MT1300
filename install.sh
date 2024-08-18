@@ -4,15 +4,15 @@
 opkg update
 opkg install coreutils-nohup bash iptables dnsmasq-full curl libcurl4 ca-certificates ipset ip-full iptables-mod-tproxy iptables-mod-extra libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip luci-compat luci luci-base htop ttyd luci-app-ttyd luci-i18n-ttyd-zh-cn luci-lib-ipkg wget
 
-wget -O /tmp/argon.ipk https://ghproxy.com/https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.2.9.4/luci-theme-argon-master_2.2.9.4_all.ipk
+wget -O /tmp/argon.ipk https://mirror.ghproxy.com/https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.3.1/luci-theme-argon_2.3.1_all.ipk
 opkg install /tmp/argon.ipk
 rm -f /tmp/argon.ipk
 
-wget -O /tmp/argon-config.ipk https://ghproxy.com/https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.8-beta/luci-app-argon-config_0.8-beta_all.ipk
+wget -O /tmp/argon-config.ipk https://mirror.ghproxy.com/https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.9/luci-app-argon-config_0.9_all.ipk
 opkg install /tmp/argon-config.ipk
 rm -f /tmp/argon-config.ipk
 
-wget -O /tmp/ramfree.ipk https://op.dllkids.xyz/packages/arm_cortex-a7_neon-vfpv4/luci-app-ramfree_git-22.174.45616-591316c_all.ipk
+wget -O /tmp/ramfree.ipk https://op.dllkids.xyz/packages/arm_cortex-a7/luci-app-ramfree_git-25.054.68431-4e7d809_all.ipk
 opkg install /tmp/ramfree.ipk
 rm -f /tmp/ramfree.ipk
 
